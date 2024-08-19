@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CharacterMovement : MonoBehaviour
 {
-    private readonly float MovementSpeed = 0.01f;
+    private readonly float MovementSpeed = 5f;
+    private readonly float RotationSpeed = 100f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,26 +17,36 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 movementDirection = new();
+
         // Forwards
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position = transform.position + new Vector3(0, 0, MovementSpeed);
+            movementDirection.z = MovementSpeed;
         }
         // Backwards
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position = transform.position + new Vector3(0, 0, -MovementSpeed);
+            movementDirection.z = -MovementSpeed;
         }
         // Left
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position = transform.position + new Vector3(-MovementSpeed, 0);
+            movementDirection.x = -MovementSpeed;
         }
         // Right
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position = transform.position + new Vector3(MovementSpeed, 0);
+            movementDirection.x = MovementSpeed;
         }
-        transform.rotation = Quaternion.LookRotation(transform.position);
+
+        if (movementDirection != Vector3.zero)
+        {
+            transform.Translate(movementDirection * Time.deltaTime, Space.World);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                Quaternion.LookRotation(movementDirection, Vector3.up),
+                RotationSpeed * Time.deltaTime);
+        }
     }
 }
