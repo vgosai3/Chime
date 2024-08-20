@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class CharacterMovement : MonoBehaviour
 {
     private readonly float MovementSpeed = 5f;
-    private readonly float RotationSpeed = 100f;
+    private readonly float RotationSpeed = 500f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,22 +22,22 @@ public class CharacterMovement : MonoBehaviour
         // Forwards
         if (Input.GetKey(KeyCode.W))
         {
-            movementDirection.z = MovementSpeed;
+            movementDirection.z += MovementSpeed;
         }
         // Backwards
         if (Input.GetKey(KeyCode.S))
         {
-            movementDirection.z = -MovementSpeed;
+            movementDirection.z -= MovementSpeed;
         }
         // Left
         if (Input.GetKey(KeyCode.A))
         {
-            movementDirection.x = -MovementSpeed;
+            movementDirection.x -= MovementSpeed;
         }
         // Right
         if (Input.GetKey(KeyCode.D))
         {
-            movementDirection.x = MovementSpeed;
+            movementDirection.x += MovementSpeed;
         }
 
         if (movementDirection != Vector3.zero)
