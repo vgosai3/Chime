@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponMovement : MonoBehaviour
+public class SwordMovement : MonoBehaviour
 {
-    public Transform target;
     private Animator animator;
 
     static readonly int AttackingHash = Animator.StringToHash("Attacking");
-    private readonly int AnimationLayerHash = Animator.StringToHash("Base Layer");
-    private readonly Vector3 offset = new(-1, 0, 0);
     private object Lock = new();
 
     // Start is called before the first frame update
@@ -22,18 +19,12 @@ public class WeaponMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("Update");
-        print(animator.isActiveAndEnabled);
-        print(animator.IsInTransition(AnimationLayerHash));
-        // Check if attack animation is playing before readjusting the position and rotation of the weapon
-        if (!animator.isActiveAndEnabled)
+        if (!animator.GetBool(AttackingHash))
         {
-            transform.position = target.position + (target.rotation.normalized * Quaternion.Euler(0.0f, 0.0f, 0.0f)) * offset;
-            transform.rotation = target.rotation * Quaternion.Euler(0.0f, 90.0f, 0.0f);
+            transform.position = transform.parent.transform.position;
         }
-
         // On left click, call attack function
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Attack();
         }
@@ -41,7 +32,6 @@ public class WeaponMovement : MonoBehaviour
 
     void Attack()
     {
-        print("Called");
         if (!animator.GetBool(AttackingHash))
         {
             lock (Lock)
@@ -52,6 +42,14 @@ public class WeaponMovement : MonoBehaviour
                     animator.Play("SwordSwing");
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (animator.GetBool(AttackingHash) && other.CompareTag("Enemy"))
+        {
+            print("hit");
         }
     }
 }
