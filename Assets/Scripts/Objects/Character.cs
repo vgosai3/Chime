@@ -5,8 +5,11 @@ using UnityEngine.UIElements;
 
 public class CharacterMovement : MonoBehaviour
 {
+    public GameObject TurretPrefab;
+
     private readonly float MovementSpeed = 5f;
     private readonly float RotationSpeed = 500f;
+    private bool Placeable = false;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +50,35 @@ public class CharacterMovement : MonoBehaviour
                 transform.rotation,
                 Quaternion.LookRotation(movementDirection, Vector3.up),
                 RotationSpeed * Time.deltaTime);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            TryPlace();
+        }
+    }
+
+    private void TryPlace()
+    {
+        if (Placeable)
+        {
+            Instantiate(TurretPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Placeable"))
+        {
+            Placeable = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Placeable"))
+        {
+            Placeable = false;
         }
     }
 }

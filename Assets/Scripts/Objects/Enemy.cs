@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private readonly float MovementSpeed = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +20,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("ow");
-        if (other.CompareTag("Weapon"))
+        if (other.CompareTag("Weapon") || other.CompareTag("Projectile"))
         {
             Destroy(gameObject);
         }

@@ -7,7 +7,7 @@ public class BellMovement : MonoBehaviour
 {
     public Transform target;
     private readonly Vector3 Range = new Vector3(0f, 0f, -2f);
-    public float followSharpness = 0.05f;
+    public float followSharpness = 0.005f;
 
     private readonly float FloatHeight = 1.0f;
     private readonly float FloatVariance = 0.2f;
