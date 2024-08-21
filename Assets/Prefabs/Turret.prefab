@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1061688731268159384}
   - component: {fileID: 8533255314326680514}
   - component: {fileID: 2148098071067409702}
-  - component: {fileID: 1433477299800302687}
+  - component: {fileID: 2858445399067105838}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -108,7 +108,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1433477299800302687
+--- !u!114 &2858445399067105838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,4 +121,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 6235469704384994362, guid: 624e3b3289a131e4d9446c73a9762f0b, type: 3}
-  fireRate: 0.2
+  fireRate: 1.2

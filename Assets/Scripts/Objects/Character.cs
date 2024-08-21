@@ -54,11 +54,11 @@ public class CharacterMovement : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            TryPlace();
+            TryPlaceTurret();
         }
     }
 
-    private void TryPlace()
+    private void TryPlaceTurret()
     {
         if (Placeable)
         {
