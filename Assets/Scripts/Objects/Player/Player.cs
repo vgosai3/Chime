@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CharacterMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public GameObject TurretPrefab;
 

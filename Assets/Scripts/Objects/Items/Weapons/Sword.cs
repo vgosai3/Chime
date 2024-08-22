@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordMovement : MonoBehaviour
+public class Sword : MonoBehaviour
 {
     private Animator animator;
 
@@ -49,7 +49,7 @@ public class SwordMovement : MonoBehaviour
     {
         if (animator.GetBool(AttackingHash) && other.CompareTag("Enemy"))
         {
-            print("hit");
+            Destroy(other.gameObject);
         }
     }
 }

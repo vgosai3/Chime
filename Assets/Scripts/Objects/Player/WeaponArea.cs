@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponMovement : MonoBehaviour
+public class WeaponArea : MonoBehaviour
 {
     public Transform target;
     private readonly Vector3 offset = new(-1, 0, 0);
