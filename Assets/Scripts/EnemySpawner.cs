@@ -24,6 +24,8 @@ public class EnemySpawner : MonoBehaviour
         if (Time.time > _nextSpawnTime)
         {
             _nextSpawnTime += spawnRate;
+            int LayerMobs = LayerMask.NameToLayer("Mobs");
+            //gameObject.layer = LayerMobs
             Instantiate(enemyPrefab, RandomPos(), Quaternion.identity);
         }
 
