@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 8876317687818580896}
   - component: {fileID: -7461572964053309513}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: BasicEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,7 +219,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 9025566382677359894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f1915a147f935845bf6c770db373a3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 47fdb297494d46f4e9bc81b518116a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2446862575313362122, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
+  HitPoints: 100
+  MaxHitPoints: 100
+  EnemyType: None
+  DamageReduction: 0.5
+  MovementSpeed: 3
+  Distance: 6
