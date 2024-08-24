@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class PlayerDetection : MonoBehaviour
 {
+
+    static public bool found = false;
     private void OnTriggerEnter(Collider other)
     {
         if(other.name == "Player") {
-            print("Player Detect");
+            found = true;
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        found = false;
     }
 }

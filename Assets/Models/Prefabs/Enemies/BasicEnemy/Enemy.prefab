@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7109638987140253629}
   - component: {fileID: 5176080905900358723}
   - component: {fileID: 3143322303936663215}
-  - component: {fileID: 1741099430976135605}
+  - component: {fileID: 8653577842959711388}
   m_Layer: 0
   m_Name: CheckSphere
   m_TagString: Untagged
@@ -63,7 +63,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1741099430976135605
+--- !u!114 &8653577842959711388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2331810230584662006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01b55990018037341baec078822f951f, type: 3}
+  m_Script: {fileID: 11500000, guid: cd28a1badf8f19b45b486a73e369d114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9025566382677359894
@@ -219,6 +219,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9025566382677359894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47fdb297494d46f4e9bc81b518116a54, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f1915a147f935845bf6c770db373a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 2446862575313362122, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
