@@ -224,6 +224,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5186924890881416050, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
+      propertyPath: Destination
+      value: 
+      objectReference: {fileID: 1094285375}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -241,7 +245,7 @@ GameObject:
   - component: {fileID: 627296225}
   - component: {fileID: 627296224}
   - component: {fileID: 627296223}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MemoryOrbReciever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1094285375}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Destination
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,11 +663,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3062399994672172407, guid: 70b21c13177a2484eb6e44e7652b5a6f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.51
+      value: 8.6
       objectReference: {fileID: 0}
     - target: {fileID: 3062399994672172407, guid: 70b21c13177a2484eb6e44e7652b5a6f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.05
+      value: 13.2
       objectReference: {fileID: 0}
     - target: {fileID: 3062399994672172407, guid: 70b21c13177a2484eb6e44e7652b5a6f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -822,9 +826,9 @@ GameObject:
   - component: {fileID: 1439102252}
   - component: {fileID: 1439102251}
   - component: {fileID: 1439102255}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MemoryOrbSender
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

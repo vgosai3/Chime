@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,6 +12,8 @@ public class Player : MonoBehaviour
     private readonly float MovementSpeed = 5f;
     private readonly float RotationSpeed = 500f;
     private bool Placeable = false;
+    public Transform Destination;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +46,12 @@ public class Player : MonoBehaviour
         {
             movementDirection.x += MovementSpeed;
         }
+        if (Input.GetKey(KeyCode.E))
+        {
+            this.gameObject.SetActive(false);
+            transform.position = Destination.position;
+            this.gameObject.SetActive(true);
+        }
 
         if (movementDirection != Vector3.zero)
         {
@@ -58,6 +68,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    /*public MemoryOrbDestination GetClosedMemoryOrb()
+    {
+
+        return ClosedOrb;
+    }*/
     private void TryPlaceTurret()
     {
         if (Placeable)
