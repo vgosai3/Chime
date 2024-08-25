@@ -30,6 +30,8 @@ public abstract class Enemy : MonoBehaviour
     [Header("Damage Settings")]
     [SerializeField]
     protected float DamageReduction = 0.5f;
+    [SerializeField]
+    protected GameObject DamageText;
 
     /// <summary>
     /// Heals the Enemy for the specified amount.
@@ -58,14 +60,27 @@ public abstract class Enemy : MonoBehaviour
         if (EnemyType.Equals("None") || enemyType.Equals(EnemyType))
         {
             HitPoints -= damage;
+            GenerateDamageText(damage);
         }
         else
         {
-            HitPoints -= damage * DamageReduction;
+            var reducedDamage = damage * DamageReduction;
+            HitPoints -= reducedDamage;
+            GenerateDamageText(reducedDamage);
         }
         if (HitPoints <= 0)
         {
             Kill();
+        }
+    }
+
+    private void GenerateDamageText(float damage)
+    {
+        GameObject damageText = Instantiate(DamageText, transform.position + Vector3.up * 3, Quaternion.identity);
+        DamageNumber damageNumber = damageText.GetComponent<DamageNumber>();
+        if (damageNumber != null)
+        {
+            damageNumber.Damage = damage;
         }
     }
 

@@ -226,5 +226,6 @@ MonoBehaviour:
   MaxHitPoints: 100
   EnemyType: None
   DamageReduction: 0.5
+  DamageText: {fileID: 4509376565031622428, guid: ead32c9825dddd4408e467fedcb12859, type: 3}
   MovementSpeed: 3
   Distance: 6
