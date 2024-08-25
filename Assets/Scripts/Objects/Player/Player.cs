@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public float HitPoints = 100;
     public GameObject TurretPrefab;
 
     private readonly float MovementSpeed = 5f;

@@ -185,5 +185,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeAlive: 0.5
-  Delta: 0.1
+  Delta: 0.3
   Damage: 1
