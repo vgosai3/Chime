@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3267623153610640864}
   - component: {fileID: 6423581003330247497}
   - component: {fileID: 8876317687818580896}
-  - component: {fileID: -7461572964053309513}
+  - component: {fileID: -2408899344005698690}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -210,7 +210,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-7461572964053309513
+--- !u!114 &-2408899344005698690
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,8 +224,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitPoints: 100
   MaxHitPoints: 100
-  EnemyType: None
   DamageReduction: 0.5
-  DamageText: {fileID: 4509376565031622428, guid: ead32c9825dddd4408e467fedcb12859, type: 3}
+  EnemyType: 0
+  DamageText: {fileID: 0}
+  AttackRadius: 1
+  AttackSpeed: 1
+  Damage: 3
   MovementSpeed: 3
-  Distance: 6
+  Distance: 10

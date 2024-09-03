@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -63,6 +64,7 @@ public class Player : MonoBehaviour
                 RotationSpeed * Time.deltaTime);
         }
 
+        #warning Player is currently hard coded to place turret, change this to place from active inventory slot
         if (Input.GetMouseButtonDown(1))
         {
             TryPlaceTurret();
@@ -96,5 +98,11 @@ public class Player : MonoBehaviour
         {
             Placeable = false;
         }
+    }
+
+    // Basic implementation for taking damage, can modify later
+    public void TakeDamage(float damage)
+    {
+        HitPoints -= damage;
     }
 }

@@ -19,10 +19,8 @@ public class PlayerHitPointsDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("update");
         if (player != null)
         {
-            print("yey");
             Player script = player.GetComponent<Player>();
             Text.SetText("HP: " + script.HitPoints.ToString());
         }
