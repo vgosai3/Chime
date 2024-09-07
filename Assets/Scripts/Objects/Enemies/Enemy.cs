@@ -91,7 +91,7 @@ public abstract class Enemy : MonoBehaviour
         {
             // Get the distance from the enemy to the player
             float dist = Vector3.Distance(_Player.transform.position, transform.position);
-            print(dist < AttackRadius);
+            //print(dist < AttackRadius);
             // If the distance is less than the attack radius
             if (dist < AttackRadius)
             {
