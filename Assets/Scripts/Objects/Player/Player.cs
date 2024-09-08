@@ -8,96 +8,88 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    public float HitPoints = 100;
-    public GameObject TurretPrefab;
 
-    private readonly float MovementSpeed = 5f;
-    private readonly float RotationSpeed = 500f;
-    private bool Placeable = false;
-    public Transform Destination;
-    
+    //Components
+    private CharacterMovementComponent characterMovementComponent;
+    private InteractorComponent interactorComponent;
+    private PlayerInventoryComponent playerInventoryComponent;
 
-    // Start is called before the first frame update
-    void Start()
+    //temp
+    public float HitPoints;
+
+    public void Reset()
     {
+        this.AddComponent<CharacterMovementComponent>();
+        this.AddComponent<InteractorComponent>();
+        this.AddComponent<PlayerInventoryComponent>();
+    }
+    public void Start()
+    {
+        characterMovementComponent = this.GetComponent<CharacterMovementComponent>();
+        interactorComponent = this.GetComponent<InteractorComponent>();
+        playerInventoryComponent = this.GetComponent<PlayerInventoryComponent>();
+    }
+    public void Update()
+    {
+        bool primaryAction = Input.GetButtonDown("PrimaryAction");
+        bool interact = Input.GetButtonDown("Interact");
+
+        //Temp buttonchecks?
+        bool dropItem = Input.GetKeyDown("g");
+        bool numberKey1 = Input.GetKeyDown("1");
+        bool numberKey2 = Input.GetKeyDown("2");
+        bool numberKey3 = Input.GetKeyDown("3");
+        bool numberKey4 = Input.GetKeyDown("4");
+        bool numberKey5 = Input.GetKeyDown("5");
+        bool numberKey6 = Input.GetKeyDown("6");
+
+        if (primaryAction)
+        {
+            playerInventoryComponent.UseActiveItemPrimaryAction();
+        }
+
+        if (interact)
+        {
+            interactorComponent.Interact();
+        }
+
+        if (dropItem)
+        {
+            playerInventoryComponent.DropItem();
+        }
+
+        if (numberKey1)
+        {
+            playerInventoryComponent.SelectItemByIndex(0);
+        }
+        if (numberKey2)
+        {
+            playerInventoryComponent.SelectItemByIndex(1);
+        }
+        if (numberKey3)
+        {
+            playerInventoryComponent.SelectItemByIndex(2);
+        }
+        if (numberKey4)
+        {
+            playerInventoryComponent.SelectItemByIndex(3);
+        }
+        if (numberKey5)
+        {
+            playerInventoryComponent.SelectItemByIndex(4);
+        }
+        if (numberKey6)
+        {
+            playerInventoryComponent.SelectItemByIndex(5);
+        }
         
     }
-
-    // Update is called once per frame
-    void Update()
+    public void FixedUpdate()
     {
-        Vector3 movementDirection = new();
-
-        // Forwards
-        if (Input.GetKey(KeyCode.W))
-        {
-            movementDirection.z += MovementSpeed;
-        }
-        // Backwards
-        if (Input.GetKey(KeyCode.S))
-        {
-            movementDirection.z -= MovementSpeed;
-        }
-        // Left
-        if (Input.GetKey(KeyCode.A))
-        {
-            movementDirection.x -= MovementSpeed;
-        }
-        // Right
-        if (Input.GetKey(KeyCode.D))
-        {
-            movementDirection.x += MovementSpeed;
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            this.gameObject.SetActive(false);
-            transform.position = Destination.position;
-            this.gameObject.SetActive(true);
-        }
-
-        if (movementDirection != Vector3.zero)
-        {
-            transform.Translate(movementDirection * Time.deltaTime, Space.World);
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                Quaternion.LookRotation(movementDirection, Vector3.up),
-                RotationSpeed * Time.deltaTime);
-        }
-
-        #warning Player is currently hard coded to place turret, change this to place from active inventory slot
-        if (Input.GetMouseButtonDown(1))
-        {
-            TryPlaceTurret();
-        }
-    }
-
-    /*public MemoryOrbDestination GetClosedMemoryOrb()
-    {
-
-        return ClosedOrb;
-    }*/
-    private void TryPlaceTurret()
-    {
-        if (Placeable)
-        {
-            Instantiate(TurretPrefab, transform.position, Quaternion.identity);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Placeable"))
-        {
-            Placeable = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Placeable"))
-        {
-            Placeable = false;
-        }
+        //Eventually just smooth input yourself
+        Vector2 smoothedMovement = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1.0f);
+        Vector2 rawMovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        characterMovementComponent.MoveCharacter(new Vector3(smoothedMovement.x, 0.0f, smoothedMovement.y), new Vector3(rawMovementInput.x, 0.0f, rawMovementInput.y));
     }
 
     // Basic implementation for taking damage, can modify later
