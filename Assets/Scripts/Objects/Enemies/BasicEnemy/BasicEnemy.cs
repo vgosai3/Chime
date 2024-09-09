@@ -21,7 +21,10 @@ public class BasicEnemy : Enemy
             if (dist < Distance)
             {
                 transform.LookAt(_Player.transform);
-                transform.Translate(MovementSpeed * Vector3.forward * Time.deltaTime);
+                if (dist >= AttackRadius)
+                {
+                    transform.Translate(MovementSpeed * Vector3.forward * Time.deltaTime);
+                }
             }
         } else
         {
