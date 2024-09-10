@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
     public void PlayGame() 
     {
         SceneManager.LoadSceneAsync(0);
+        // Reset timescale if returned from pause menu
+        Time.timeScale = 1f;
     }   
 
     //Quit button functionality
