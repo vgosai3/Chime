@@ -9,6 +9,7 @@ TagManager:
   - Placeable
   - Projectile
   - Interactable
+  - NPC
   layers:
   - Default
   - TransparentFX
