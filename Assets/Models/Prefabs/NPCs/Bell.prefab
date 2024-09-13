@@ -116,11 +116,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1556059857392514378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66a7dd5128c24d84fb474cfdb86324bd, type: 3}
+  m_Script: {fileID: 11500000, guid: aee31a1ac1f31d34ead0a2b385eb3dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  followSharpness: 0.05
+  followSharpness: 0.005
 --- !u!95 &8076432021346885273
 Animator:
   serializedVersion: 5

@@ -9,6 +9,7 @@ TagManager:
   - Placeable
   - Projectile
   - Interactable
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Bell
   - Mobs
   - EventInteractables
-  - 
+  - NPCs
   - 
   - 
   - 
