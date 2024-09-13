@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class NPC : MonoBehaviour
 {
-
-    public Transform target;
     protected GameObject _Player;
     protected const double INTERACT_RADIUS = 4; //3 - 4 is the sweet spot :)
     protected bool canMove = false;
@@ -29,7 +27,7 @@ public abstract class NPC : MonoBehaviour
         //when G is pressed and player in radius, interaction
         if (Input.GetKeyDown(KeyCode.G))
         {
-            if (Vector3.Distance(target.position, _Player.transform.position) <= INTERACT_RADIUS)
+            if (Vector3.Distance(transform.position, _Player.transform.position) <= INTERACT_RADIUS)
             {
                 Interaction();
             }
