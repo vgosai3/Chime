@@ -34,17 +34,12 @@ public class MainMenu : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
         qualityDropdown.value = QualitySettings.GetQualityLevel();
         qualityDropdown.RefreshShownValue();
-        float f = 0;
-
-        
+        float f = 0;        
         if (audioMixer.GetFloat("volume", out f)) {
             volumeSlider.value = f;
         }
         volumeSlider.value = f;
         fullscreenToggle.isOn = Screen.fullScreen;
-        Debug.Log(f);
-        Debug.Log(Screen.fullScreen);
-        Debug.Log(QualitySettings.GetQualityLevel());
     }
 
     //Play button functionality take to level 1
