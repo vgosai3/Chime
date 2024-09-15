@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -224,14 +224,28 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3771075496146518513, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 5186924890881416050, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
       propertyPath: Destination
       value: 
       objectReference: {fileID: 1094285375}
+    - target: {fileID: 6709912280151146731, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2446862575313362122, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1895096453}
+    - targetCorrespondingSourceObject: {fileID: 2446862575313362122, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1895096452}
   m_SourcePrefab: {fileID: 100100000, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
 --- !u!1 &159616294
 GameObject:
@@ -2871,6 +2885,55 @@ CanvasRenderer:
 --- !u!4 &1895096451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1233432162011573047, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
+  m_PrefabInstance: {fileID: 112352720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1895096452
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226113905}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1895096453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226113905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e1dcb442e3f4ee0ab7d52e4729be4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractableArea: {fileID: 1895096454}
+  ItemIcon: {fileID: 0}
+  TurretPrefab: {fileID: 8582617367811167285, guid: b44d3eed9159fe04db421de142e2e86b, type: 3}
+  playerCamera: {fileID: 963194227}
+  placementRange: 5
+--- !u!65 &1895096454 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 6709912280151146731, guid: 956d4521cab2ee24dbc9f0776c8ee61d, type: 3}
   m_PrefabInstance: {fileID: 112352720}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1946177112
