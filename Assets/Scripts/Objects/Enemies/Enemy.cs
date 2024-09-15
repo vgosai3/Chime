@@ -86,8 +86,13 @@ public abstract class Enemy : MonoBehaviour
     /// </summary>
     private void LateUpdate()
     {
+        //Check if Player is in a memory orb; if it is, delete all enemy objects
+        if (Globals.inOrb)
+        {
+            Kill();
+        }
         // Check if Player is null; if it is, the Player is not found in the current scene
-        if (_Player != null)
+        else if (_Player != null)
         {
             // Get the distance from the enemy to the player
             float dist = Vector3.Distance(_Player.transform.position, transform.position);
