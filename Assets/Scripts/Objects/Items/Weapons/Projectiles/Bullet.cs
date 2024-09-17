@@ -27,6 +27,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            Debug.Log("Enemy hit by turret projectile");
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (enemy != null) {
                 enemy.TakeDamage(20.0f, Type.None);
