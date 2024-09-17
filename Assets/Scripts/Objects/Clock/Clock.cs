@@ -2,6 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/* 
+
+CLOCK CLASS USAGE
+- Add Clock script to one singular Clock Object
+- Check the [SerializeField] variables (also seen in the Clock Object) 
+    and adjust them for testing
+- Getters: Day(), Timer(), Paused() or IsPaused()
+- Pause() to pause clock
+- UnPause() to unpause clock
+- Note: there is only a day counter,
+    so use ["Day:" + Clock.Day()] and ["Night:" + Clock.Day()]. 
+    Therefore, if it is Day 2 and it just became nighttime, it would be Night 2.
+
+*/
+
 public class Clock : MonoBehaviour
 {
     // Timing of Days
