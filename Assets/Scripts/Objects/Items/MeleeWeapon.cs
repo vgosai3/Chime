@@ -5,16 +5,11 @@ using UnityEngine;
 public abstract class MeleeWeapon : AItem
 {
     [SerializeField] protected string WeaponName;
-    [SerializeField] protected float HP = 100.0f;
-    [SerializeField] protected float AttackCooldown = 0.5f;
-    [SerializeField] protected float AttackSpeed = 0.5f;
-    public float Damage = 100.0f;
-
-    public void Start() 
-    {
-        GameObject _Enemy = GameObject.FindWithTag("Enemy");
-    }
-    
+    [SerializeField] protected float HP;
+    [SerializeField] protected float AttackCooldown;
+    [SerializeField] protected float AttackSpeed;
+    [SerializeField] protected float Range;
+    [SerializeField] protected float Damage;   
 
     public override void PrimaryAction() 
     {

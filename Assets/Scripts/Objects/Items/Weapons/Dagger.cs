@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : MeleeWeapon
+public class Dagger : MeleeWeapon 
 {
     private Animator animator;
     
@@ -13,13 +13,15 @@ public class Sword : MeleeWeapon
 
     private void Awake()
     {
-        WeaponName = "Sword";
-        Damage = 100;
-        Range = 1.5f;
-        AttackSpeed = 1.2f;
+        WeaponName = "Dagger";
+        Damage = 50;
+        Range = 0.5f;
+        AttackSpeed = 5.0f;
         HP = 100.0f;
         animator = gameObject.GetComponent<Animator>();
     }
+
+    // Start is called before the first frame update
 
     // Update is called once per frame
     void Update()
@@ -49,7 +51,7 @@ public class Sword : MeleeWeapon
                 if (!animator.GetBool(AttackingHash))
                 {
                     animator.enabled = true;
-                    animator.Play("SwordSwing");
+                    animator.Play("DaggerSwing");
                     StartCoroutine(ResetAttackCooldown());
                 }
             }
