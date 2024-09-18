@@ -18,7 +18,7 @@ public class Dagger : MeleeWeapon
         Range = 0.5f;
         AttackSpeed = 5.0f;
         MaxHP = 100.0f;
-        HP = MaxHp;
+        HP = MaxHP;
         AttackCooldown = 0.5f;
         animator = gameObject.GetComponent<Animator>();
     }
