@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class MeleeWeapon : AItem
 {
     [SerializeField] protected string WeaponName;
+    [SerializeField] protected float MaxHP;
     [SerializeField] protected float HP;
     [SerializeField] protected float AttackCooldown;
     [SerializeField] protected float AttackSpeed;
@@ -16,11 +17,6 @@ public abstract class MeleeWeapon : AItem
 
     }
 
-    public abstract void Attack();
-
-
-    // if weapon gets hit then it takes damage
-    // weapon will be destroyed if hp reaches 0
     public void WeaponTakeDamage(float damage) 
     {
         if (HP > damage) {
@@ -36,11 +32,23 @@ public abstract class MeleeWeapon : AItem
     {
         if (other.tag == "Enemy") {
             BasicEnemy enemy = other.gameObject.GetComponent<BasicEnemy>();
-            enemy.TakeDamage(Damage, enemy.GetEnemyType());
-            WeaponTakeDamage(enemy.Damage);
+            enemy.TakeDamage(Damage, enemy.GetEnemyType()); // enemy takes damage
+            WeaponTakeDamage(enemy.Damage); // weapon also takes damage
         }
     }
 
+    public void UpgradeWeapon(float additionalDamage, float additionalSpeed, float additionalRange, float additionalHP)
+    {
+        Damage += additionalDamage;
+        AttackSpeed += additionalSpeed;
+        Range += additionalRange;
+        MaxHP += additionalHP;
+    }
+
+
+    public abstract void Attack();
+
+    
 
 
 }

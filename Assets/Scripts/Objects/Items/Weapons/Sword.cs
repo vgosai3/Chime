@@ -17,7 +17,9 @@ public class Sword : MeleeWeapon
         Damage = 100;
         Range = 1.5f;
         AttackSpeed = 1.2f;
-        HP = 100.0f;
+        MaxHP = 100.0f;
+        HP = MaxHP;
+        AttackCooldown = 1.0f;
         animator = gameObject.GetComponent<Animator>();
     }
 

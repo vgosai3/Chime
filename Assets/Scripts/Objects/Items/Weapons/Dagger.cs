@@ -17,11 +17,11 @@ public class Dagger : MeleeWeapon
         Damage = 50;
         Range = 0.5f;
         AttackSpeed = 5.0f;
-        HP = 100.0f;
+        MaxHP = 100.0f;
+        HP = MaxHp;
+        AttackCooldown = 0.5f;
         animator = gameObject.GetComponent<Animator>();
     }
-
-    // Start is called before the first frame update
 
     // Update is called once per frame
     void Update()
