@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : MonoBehaviour
+public class Sword : MeleeWeapon
 {
     private Animator animator;
+    private bool CanAttack = true;
 
     static readonly int AttackingHash = Animator.StringToHash("Attacking");
     private object Lock = new();
 
     // Start is called before the first frame update
-    void Start()
-    {
-        animator = gameObject.GetComponent<Animator>();
-        animator.enabled = false;
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -26,12 +23,16 @@ public class Sword : MonoBehaviour
         // On left click, call attack function
         if (Input.GetMouseButtonDown(0))
         {
-            Attack();
+            if (CanAttack) 
+            {
+                Attack();
+            }
         }
     }
 
-    void Attack()
+    public override void Attack()
     {
+        CanAttack = false;
         if (!animator.GetBool(AttackingHash))
         {
             lock (Lock)
@@ -40,16 +41,16 @@ public class Sword : MonoBehaviour
                 {
                     animator.enabled = true;
                     animator.Play("SwordSwing");
+                    StartCoroutine(ResetAttackCooldown());
                 }
             }
         }
+        
     }
 
-    private void OnTriggerEnter(Collider other)
+    IEnumerator ResetAttackCooldown()
     {
-        if (animator.GetBool(AttackingHash) && other.CompareTag("Enemy"))
-        {
-            Destroy(other.gameObject);
-        }
+        yield return new WaitForSeconds(AttackCooldown);
+        CanAttack = true;
     }
 }
