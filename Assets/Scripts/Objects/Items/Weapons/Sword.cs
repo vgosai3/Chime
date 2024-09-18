@@ -5,6 +5,7 @@ using UnityEngine;
 public class Sword : MeleeWeapon
 {
     private Animator animator;
+    
     private bool CanAttack = true;
 
     static readonly int AttackingHash = Animator.StringToHash("Attacking");
@@ -12,10 +13,10 @@ public class Sword : MeleeWeapon
 
     // Start is called before the first frame update
 
-
     // Update is called once per frame
     void Update()
     {
+        animator.enabled = false;
         if (!animator.GetBool(AttackingHash))
         {
             transform.position = transform.parent.transform.position;

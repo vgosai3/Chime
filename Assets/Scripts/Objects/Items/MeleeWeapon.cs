@@ -5,17 +5,16 @@ using UnityEngine;
 public abstract class MeleeWeapon : AItem
 {
     [SerializeField] protected string WeaponName;
-    [SerializeField] protected int Damage;
-    [SerializeField] protected float Range;
-    [SerializeField] protected float AttackSpeed = 1.0f;
     [SerializeField] protected float HP = 100.0f;
     [SerializeField] protected float AttackCooldown = 0.5f;
+    [SerializeField] protected float AttackSpeed = 0.5f;
+    public float Damage = 100.0f;
 
-    void Start()
+    public void Start() 
     {
-        animator = gameObject.GetComponent<Animator>();
-        animator.enabled = false;
+        GameObject _Enemy = GameObject.FindWithTag("Enemy");
     }
+    
 
     public override void PrimaryAction() 
     {
@@ -27,10 +26,10 @@ public abstract class MeleeWeapon : AItem
 
     // if weapon gets hit then it takes damage
     // weapon will be destroyed if hp reaches 0
-    public void TakeDamage(float damage) 
+    public void WeaponTakeDamage(float damage) 
     {
-        if (hp > damage) {
-            hp -= damage;
+        if (HP > damage) {
+            HP -= damage;
         }
         else {
             Destroy(gameObject);
@@ -41,7 +40,9 @@ public abstract class MeleeWeapon : AItem
     public void OnTriggerEnter(Collider other) 
     {
         if (other.tag == "Enemy") {
-            other.TakeDamage(Damage);
+            BasicEnemy enemy = other.gameObject.GetComponent<BasicEnemy>();
+            enemy.TakeDamage(Damage, enemy.GetEnemyType());
+            WeaponTakeDamage(enemy.Damage);
         }
     }
 
