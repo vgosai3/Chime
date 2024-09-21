@@ -191,4 +191,8 @@ public abstract class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public Type GetEnemyType() {
+        return EnemyType;
+    }
 }

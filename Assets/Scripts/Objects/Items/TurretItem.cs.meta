@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 08e1dcb442e3f4ee0ab7d52e4729be4f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - InteractableArea: {instanceID: 0}
+  - ItemIcon: {instanceID: 0}
+  - TurretPrefab: {fileID: 8582617367811167285, guid: b44d3eed9159fe04db421de142e2e86b, type: 3}
+  - playerCamera: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

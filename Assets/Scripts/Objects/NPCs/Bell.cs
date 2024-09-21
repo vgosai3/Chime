@@ -9,9 +9,12 @@ public class BellMovement : MonoBehaviour
     private readonly Vector3 Range = new Vector3(0f, 0f, -2f);
     public float followSharpness = 0.005f;
 
-    private readonly float FloatHeight = 1.0f;
+    private float FloatHeight = 1.0f; //Wenwei cheated and took away read only to do the hovering
     private readonly float FloatVariance = 0.2f;
     private readonly float FloatSpeed = 1.5f;
+
+    private bool teleporting = false;
+    private float pauseCount = 2f;
 
     // Start is called before the first frame updatew
     void Start()
@@ -28,7 +31,27 @@ public class BellMovement : MonoBehaviour
     private void LateUpdate()
     {
         // Follow character with delay
-        var magnitude = target.position + target.rotation.normalized * Range;
-        transform.position += (magnitude - transform.position) * followSharpness;
+        if(!teleporting)
+        {
+            var magnitude = target.position + target.rotation.normalized * Range;
+            transform.position += (magnitude - transform.position) * followSharpness;
+        }//if teleporting, bell will not follow player
     }
+
+    public void Hover(Transform Orb)
+    {
+        teleporting = true;
+        FloatHeight += 2;
+        transform.position = Orb.position;
+        StartCoroutine(HoverAndWait());
+    }//Hovering after orb interaction
+
+
+    private IEnumerator HoverAndWait()
+    {
+        yield return new WaitForSeconds(pauseCount);
+        teleporting = false;
+        FloatHeight -= 2;
+    }//waits pauseCount seconds before bell returns to normal
+
 }
