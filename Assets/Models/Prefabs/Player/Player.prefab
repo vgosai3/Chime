@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 3166307916889627650}
   - component: {fileID: 7207828583038381013}
   - component: {fileID: 8779274765757049430}
-  - component: {fileID: 3771075496146518513}
   - component: {fileID: 5868868263282380410}
   m_Layer: 6
   m_Name: Player
@@ -216,23 +215,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotCount: 6
---- !u!114 &3771075496146518513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2446862575313362122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08e1dcb442e3f4ee0ab7d52e4729be4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InteractableArea: {fileID: 6709912280151146731}
-  ItemIcon: {fileID: 0}
-  TurretPrefab: {fileID: 8582617367811167285, guid: b44d3eed9159fe04db421de142e2e86b, type: 3}
-  playerCamera: {fileID: 0}
-  placementRange: 5
 --- !u!54 &5868868263282380410
 Rigidbody:
   m_ObjectHideFlags: 0
