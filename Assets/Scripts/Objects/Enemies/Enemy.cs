@@ -76,6 +76,11 @@ public abstract class Enemy : MonoBehaviour
         // Try to find the player object by the tag - we are using GameObject.FindWithTag
         // instead of GameObject.Find for efficiency
         _Player = GameObject.FindWithTag("Player");
+        _Start();
+    }
+
+    protected virtual void _Start()
+    {
     }
 
     /// <summary>
