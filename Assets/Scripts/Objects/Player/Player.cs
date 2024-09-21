@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private CharacterMovementComponent characterMovementComponent;
     private InteractorComponent interactorComponent;
     private PlayerInventoryComponent playerInventoryComponent;
+    public Transform Destination;
+    public GameObject currentNPC;
 
     //temp
     public float HitPoints;
@@ -82,7 +84,29 @@ public class Player : MonoBehaviour
         {
             playerInventoryComponent.SelectItemByIndex(5);
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+
+            //Checks for if the memory orb is already triggered.
+            //Prevents duplicate spawning for NPCs and
+            //the player continuously teleporting.
+            if (!Globals.inOrb)
+            {
+
+                //Moves player to reciever memory orb.
+                this.gameObject.SetActive(false);
+                transform.position = Destination.position;
+                this.gameObject.SetActive(true);
+
+                //Spawns new NPC. 
+                Instantiate(currentNPC, Destination.position + new Vector3(7, 0, 0), Quaternion.identity);
+                Globals.inOrb = true;
+            }
+            
+            //((NonPlayerCharacters)(Globals.currentNPC)).ToString() -> identifies current NPC according to Globals, unsure how to tie GameObjects to it for spawning
+        }
+
     }
     public void FixedUpdate()
     {
