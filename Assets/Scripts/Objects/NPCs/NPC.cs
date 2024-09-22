@@ -5,8 +5,9 @@ using UnityEngine;
 public abstract class NPC : MonoBehaviour
 {
     protected GameObject _Player;
-    protected const double INTERACT_RADIUS = 4; //3 - 4 is the sweet spot :)
     protected bool canMove = false;
+    protected const double INTERACT_RADIUS = 4;
+    protected int id = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +25,8 @@ public abstract class NPC : MonoBehaviour
             Movement();
         }
 
-        //when G is pressed and player in radius, interaction
-        if (Input.GetKeyDown(KeyCode.G))
+        //when E is pressed and player in radius, interaction
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (Vector3.Distance(transform.position, _Player.transform.position) <= INTERACT_RADIUS)
             {

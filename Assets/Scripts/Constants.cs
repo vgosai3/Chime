@@ -25,3 +25,14 @@ public enum Item
     Dagger,
     Sword
 }
+
+/// <summary>
+/// An enum that defines all npcs that the player
+/// can interact with.
+/// </summary>
+public enum NonPlayerCharacters
+{
+    Farmer,
+    Blacksmith,
+    King
+}
