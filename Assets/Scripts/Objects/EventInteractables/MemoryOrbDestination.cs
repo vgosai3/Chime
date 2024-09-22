@@ -8,6 +8,7 @@ using UnityEngine;
 public class MemoryOrbDestination : AInteractableComponent
 {
     public Transform memOrbReceiver;
+    public GameObject currentNPC;
 
     public BellMovement bellMovement;
     public float pauseCount = 2f;
@@ -29,5 +30,9 @@ public class MemoryOrbDestination : AInteractableComponent
         interactor.transform.position = memOrbReceiver.position;
         interactor.SetActive(true);
         interacting = false;
+
+        //Spawns new NPC. 
+        Instantiate(currentNPC, memOrbReceiver.position + new Vector3(7, 0, 0), Quaternion.identity);
+        Globals.inOrb = true;
     }
 }
