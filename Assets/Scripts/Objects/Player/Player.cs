@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     //temp
     public float HitPoints;
 
+    //Movement relative to camera
+    public Transform cameraTransform;
+
     public void Reset()
     {
         this.AddComponent<CharacterMovementComponent>();
@@ -89,7 +92,8 @@ public class Player : MonoBehaviour
         //Eventually just smooth input yourself
         Vector2 smoothedMovement = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1.0f);
         Vector2 rawMovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        characterMovementComponent.MoveCharacter(new Vector3(smoothedMovement.x, 0.0f, smoothedMovement.y), new Vector3(rawMovementInput.x, 0.0f, rawMovementInput.y));
+        Transform cameraTransform = Camera.main.transform;
+        characterMovementComponent.MovePlayerRelativeToCamera(new Vector3(smoothedMovement.x, 0.0f, smoothedMovement.y), new Vector3(rawMovementInput.x, 0.0f, rawMovementInput.y), cameraTransform);
     }
 
     // Basic implementation for taking damage, can modify later
