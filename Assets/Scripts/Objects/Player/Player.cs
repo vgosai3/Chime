@@ -85,7 +85,6 @@ public class Player : MonoBehaviour
         {
             playerInventoryComponent.SelectItemByIndex(5);
         }
-        
     }
     public void FixedUpdate()
     {

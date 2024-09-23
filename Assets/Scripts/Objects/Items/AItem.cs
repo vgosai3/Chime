@@ -56,5 +56,9 @@ public abstract class AItem : AInteractableComponent
         //Stop rendering
         Debug.Log(this.name + " has been unequipped.");
     }
+    protected bool GetInInventory() 
+    {
+        return inInventory;
+    }
     public abstract void PrimaryAction();
 }
