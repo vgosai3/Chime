@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using Unity.VisualScripting;
 
 /// LeaperEnemy jumps toward the player, leaping onto them when in attack range.
 public class LeaperEnemy : Enemy
 {
+    public float Distance = 10.0f;
+
     [SerializeField]
     /// The leap distance.
     private float LeapDistance = 8.0f;
@@ -37,21 +40,22 @@ public class LeaperEnemy : Enemy
         if (_Player != null)
         {
             float dist = Vector3.Distance(_Player.transform.position, transform.position);
-
-            if (!_IsLeaping)
+            if (dist < Distance)
             {
-                // Leap toward the player if within leap distance and enough time has passed
-                if (dist <= LeapDistance && Time.time - _LastLeapTime >= LeapCooldown)
+                if (!_IsLeaping)
                 {
-                    StartLeap();
+                    // Leap toward the player if within leap distance and enough time has passed
+                    if (dist <= LeapDistance && Time.time - _LastLeapTime >= LeapCooldown)
+                    {
+                        StartLeap();
+                    }
+                }
+                else
+                {
+                    // Check if the leap is complete
+                    CompleteLeapCheck();
                 }
             }
-            else
-            {
-                // Check if the leap is complete
-               CompleteLeapCheck();
-            }
-
             // Stop moving and attack if within attack range
             /*if (dist <= AttackRadius)
             {

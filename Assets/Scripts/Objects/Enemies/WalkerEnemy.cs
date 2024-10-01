@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,7 +6,9 @@ using UnityEngine.AI;
 public class WalkerEnemy : Enemy
 {
     [SerializeField]
-    private float MoveSpeed = 3.0f;
+    protected float MoveSpeed = 3.0f;
+
+    public float Distance = 10.0f;
 
     private NavMeshAgent _Agent;
 
@@ -22,14 +25,19 @@ public class WalkerEnemy : Enemy
         if (_Player != null){
             // Calculate the distance from the enemy to the player
             float dist = Vector3.Distance(_Player.transform.position, transform.position);
-
-            // If the player is outside the attack radius, move toward the player
-            if (dist > AttackRadius) {
-                _Agent.SetDestination(_Player.transform.position);
-            } else {
-                // Stop moving when in attack range
-                _Agent.velocity = Vector3.zero;
-                /*Attack();*/
+            if (dist < Distance)
+            {
+                // If the player is outside the attack radius, move toward the player
+                if (dist > AttackRadius)
+                {
+                    _Agent.SetDestination(_Player.transform.position);
+                }
+                else
+                {
+                    // Stop moving when in attack range
+                    _Agent.velocity = Vector3.zero;
+                    /*Attack();*/
+                }
             }
         }
     }

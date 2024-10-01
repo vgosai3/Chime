@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,6 +6,8 @@ using UnityEngine.AI;
 /// then rests for a few seconds before resuming the chase.
 public class ChaserEnemy : Enemy
 {
+    public float Distance = 10.0f;
+
     [SerializeField]
     /// The movement speed of the Chaser enemy.
     private float MoveSpeed = 4.0f;
@@ -33,21 +36,22 @@ public class ChaserEnemy : Enemy
         if (_Player != null) //player found
         {
             float dist = Vector3.Distance(_Player.transform.position, transform.position);
-
-            // Chase the player for the chase duration, then rest for rest duration
-            if (Time.time - _LastChaseTime < ChaseDuration) //If ((time at that point in the game) - (time last chase occurred) < ChaseTime)
+            if (dist < Distance)
             {
-                _Agent.SetDestination(_Player.transform.position);
-            }
-            else
-            {
-                _Agent.velocity = Vector3.zero;
-                if (Time.time - _LastChaseTime >= ChaseDuration + RestDuration) // if sufficiently rested
+                // Chase the player for the chase duration, then rest for rest duration
+                if (Time.time - _LastChaseTime < ChaseDuration) //If ((time at that point in the game) - (time last chase occurred) < ChaseTime)
                 {
-                    _LastChaseTime = Time.time; //lastchase is now time elased in the game and then chase
+                    _Agent.SetDestination(_Player.transform.position);
+                }
+                else
+                {
+                    _Agent.velocity = Vector3.zero;
+                    if (Time.time - _LastChaseTime >= ChaseDuration + RestDuration) // if sufficiently rested
+                    {
+                        _LastChaseTime = Time.time; //lastchase is now time elased in the game and then chase
+                    }
                 }
             }
-
             // Trigger collision-based attack
             /*if (dist < AttackRadius)
             {

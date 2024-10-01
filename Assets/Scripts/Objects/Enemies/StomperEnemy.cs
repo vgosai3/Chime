@@ -7,9 +7,9 @@ public class StomperEnemy : Enemy{
     //The movement speed of the Stomper enemy
     private float MoveSpeed = 1.5f;
 
+    public float Distance = 10.0f;
+
     private NavMeshAgent _Agent;
-
-
 
     protected override void _Start()
     {
@@ -21,14 +21,19 @@ public class StomperEnemy : Enemy{
         if(_Player != null){
             //Find the player's distance to the enemy
             float dist = Vector3.Distance(_Player.transform.position, transform.position);
-        
-            if (dist > AttackRadius){
-                //Move towards player if the player is outside the attatck radius
-                _Agent.SetDestination(_Player.transform.position);
-            } else {
-                //Set the velocity to zero to attack
-                _Agent.velocity = Vector3.zero; 
-                /*Attack();*/
+            if (dist < Distance)
+            {
+                if (dist > AttackRadius)
+                {
+                    //Move towards player if the player is outside the attatck radius
+                    _Agent.SetDestination(_Player.transform.position);
+                }
+                else
+                {
+                    //Set the velocity to zero to attack
+                    _Agent.velocity = Vector3.zero;
+                    /*Attack();*/
+                }
             }
         }
     }
