@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 /// RangedEnemy maintains a distance from the player, 
 /// retreating if too close and chasing if too far.
-public class RangedEnemy : Enemy{
+public class RangedEnemyAttack : Enemy {
     [SerializeField]
     /// The movement speed of the Ranged enemy.
     private float MoveSpeed = 3.5f;
