@@ -21,29 +21,17 @@ public class Clock : MonoBehaviour
 {
     // Timing of Days
     [SerializeField] private long SECONDS_PER_DAY   = 100; // should be static but
-    [SerializeField] private long SECONDS_PER_NIGHT = 100; // playtest first
-
-    // Counter Stuff
-    [SerializeField] private long dayCounter        = 0;
-    [SerializeField] private float timer            = 0;
-    [SerializeField] private bool isDaytime         = true;
-    [SerializeField] private bool paused            = false;
-
-    // Getters
-    public long Day() { return dayCounter; }
-    public float Timer() { return timer; }
-    public bool Paused() { return paused; }
-    public bool IsPaused() { return Paused(); }
+    [SerializeField] private long SECONDS_PER_NIGHT = 100; // playtest first   
 
     // Pausing
     public void Pause()
     {
-        paused = true;
+        Globals.isPaused = true;
     }
 
     public void UnPause()
     {
-        paused = false;
+        Globals.isPaused = false;
     }
 
     // Start is called before the first frame update
@@ -54,38 +42,39 @@ public class Clock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!paused)
+        if (!Globals.isPaused)
         {
             UpdateTime();
         }
+
     }
 
     void UpdateTime()
     {
-        timer += Time.deltaTime;
+        Globals.timer += Time.deltaTime;
 
         // Switch Day/Night if timer has reached the end
-        if (isDaytime) 
+        if (Globals.saveData.isDaytime) 
         {
             // Switch to Night if Day ended
-            bool dayEnd = timer >= SECONDS_PER_DAY;
+            bool dayEnd = Globals.timer >= SECONDS_PER_DAY;
             if (dayEnd)
             {
                 // Change to night, Reset timer
                 // DO NOT increment day because night has not ended.
-                isDaytime = false;
-                timer = 0;
+                Globals.saveData.isDaytime = false;
+                Globals.timer = 0;
             }
         } else 
         {
             // Switch to Day if Night ended
-            bool nightEnd = timer >= SECONDS_PER_NIGHT;
+            bool nightEnd = Globals.timer >= SECONDS_PER_NIGHT;
             if (nightEnd)
             {
                 // Change to day, Increment day, and Reset timer
-                isDaytime = true;
-                dayCounter++;
-                timer = 0;
+                Globals.saveData.isDaytime = true;
+                Globals.dayCounter++;
+                Globals.timer = 0;
             }
         }
 

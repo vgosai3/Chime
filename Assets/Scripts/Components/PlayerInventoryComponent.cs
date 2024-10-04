@@ -109,4 +109,9 @@ public class PlayerInventoryComponent : MonoBehaviour
             inventoryGUI.RemoveItem(activeItemIndex);
         }
     }
+
+    public AItem[] getItems()
+    {
+        return items;
+    }
 }
