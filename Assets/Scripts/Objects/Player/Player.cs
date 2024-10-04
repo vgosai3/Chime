@@ -30,9 +30,13 @@ public class Player : MonoBehaviour
         characterMovementComponent = this.GetComponent<CharacterMovementComponent>();
         interactorComponent = this.GetComponent<InteractorComponent>();
         playerInventoryComponent = this.GetComponent<PlayerInventoryComponent>();
+        Globals.player = this;
     }
     public void Update()
     {
+
+        //Debug.Log(Globals.player.characterMovementComponent);
+
         bool primaryAction = Input.GetButtonDown("PrimaryAction");
         bool interact = Input.GetButtonDown("Interact");
 
@@ -84,7 +88,10 @@ public class Player : MonoBehaviour
         {
             playerInventoryComponent.SelectItemByIndex(5);
         }
+        Globals.player = this;
+        Globals.SaveFileUpdate();
     }
+
     public void FixedUpdate()
     {
         //Eventually just smooth input yourself
@@ -98,5 +105,10 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         HitPoints -= damage;
+    }
+
+    public AItem[] getPlayerInventory()
+    {
+        return playerInventoryComponent.getItems();
     }
 }
