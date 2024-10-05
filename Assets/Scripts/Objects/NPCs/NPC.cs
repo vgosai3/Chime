@@ -8,6 +8,27 @@ public abstract class NPC : MonoBehaviour
     protected bool canMove = false;
     protected const double INTERACT_RADIUS = 4;
     protected int id = -1;
+    [SerializeField] bool firstInteraction = true;
+    [SerializeField] int repeatStartPosition;
+    public string npcName;
+    public DialogueAsset dialogueAsset;
+
+    //returns where the dialogue should start
+    public int StartDialoguePosition 
+    {
+        get 
+        {
+            if (firstInteraction) 
+            {
+                firstInteraction = false;
+                return 0;
+            }
+            else 
+            {
+                return repeatStartPosition;
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
