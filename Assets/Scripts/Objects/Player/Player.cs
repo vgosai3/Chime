@@ -5,9 +5,13 @@ using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
+
+
 
 public class Player : MonoBehaviour
 {
+
     public float HitPoints = 100;
     public GameObject TurretPrefab;
 
@@ -48,6 +52,9 @@ public class Player : MonoBehaviour
         {
             movementDirection.x += MovementSpeed;
         }
+        
+
+
         if (Input.GetKey(KeyCode.E))
         {
             this.gameObject.SetActive(false);
@@ -69,6 +76,10 @@ public class Player : MonoBehaviour
         {
             TryPlaceTurret();
         }
+
+        if (Input.GetKeyDown(KeyCode.Space)){ 
+        TakeDamage(20);                       //Use spacebar to test damage function
+        }  
     }
 
     /*public MemoryOrbDestination GetClosedMemoryOrb()
@@ -101,8 +112,11 @@ public class Player : MonoBehaviour
     }
 
     // Basic implementation for taking damage, can modify later
+    
     public void TakeDamage(float damage)
     {
         HitPoints -= damage;
     }
+
+
 }
