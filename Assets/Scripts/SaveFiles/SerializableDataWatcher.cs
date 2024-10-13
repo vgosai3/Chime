@@ -12,5 +12,5 @@ public class SerializableDataWatcher
     [SerializeField] public bool isDaytime = false;
     [SerializeField] public long dayCounter = 0;
     [SerializeField] public Vector3 playerLocation = Vector3.forward;
-    [SerializeField] public AItem[] playerInventory = null;
+    [SerializeField] public int[] playerInventory = null;
 }

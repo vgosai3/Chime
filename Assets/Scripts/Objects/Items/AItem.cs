@@ -11,6 +11,7 @@ public abstract class AItem : AInteractableComponent
     public Sprite ItemIcon;
     private bool inInventory;
     private MeshRenderer meshRenderer;
+    private int id;
 
     public override void Reset()
     {
@@ -21,6 +22,7 @@ public abstract class AItem : AInteractableComponent
     public void Start()
     {
         inInventory = false;
+        id = (int)Enum.Parse(typeof(Item), this.name);
     }
     public override void Interact(GameObject interactor)
     {
@@ -60,5 +62,11 @@ public abstract class AItem : AInteractableComponent
     {
         return inInventory;
     }
+
+    public int getID()
+    {
+        return id;
+    }
+
     public abstract void PrimaryAction();
 }

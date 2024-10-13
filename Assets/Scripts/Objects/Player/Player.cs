@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private CharacterMovementComponent characterMovementComponent;
     private InteractorComponent interactorComponent;
     private PlayerInventoryComponent playerInventoryComponent;
+    private bool hasLoaded = false;
 
     //temp
     public float HitPoints;
@@ -31,10 +32,17 @@ public class Player : MonoBehaviour
         interactorComponent = this.GetComponent<InteractorComponent>();
         playerInventoryComponent = this.GetComponent<PlayerInventoryComponent>();
         Globals.player = this;
+
+        //Save File Fixing
+        Debug.Log(Globals.playerLocation);
+        this.transform.position = Globals.playerLocation;
+        Debug.Log(this.transform.position);
+        Debug.Log("Player position updated");
+        Physics.SyncTransforms(); //fix position for character controller
+
     }
     public void Update()
     {
-
         //Debug.Log(Globals.player.characterMovementComponent);
 
         bool primaryAction = Input.GetButtonDown("PrimaryAction");
@@ -94,6 +102,7 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
+        
         //Eventually just smooth input yourself
         Vector2 smoothedMovement = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1.0f);
         Vector2 rawMovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -107,8 +116,13 @@ public class Player : MonoBehaviour
         HitPoints -= damage;
     }
 
-    public AItem[] getPlayerInventory()
+    public int[] getPlayerInventorySerialized()
     {
-        return playerInventoryComponent.getItems();
+        return playerInventoryComponent.getItemsSerialized();
+    }
+
+    public void updatePlayerInventory(int[] id)
+    {
+        playerInventoryComponent.updateItemsSerialized(id);
     }
 }

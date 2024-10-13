@@ -15,4 +15,13 @@ public static class SaveFileCompiler
         System.IO.File.WriteAllText(filePath, playerData);
         //Debug.Log("Saved!");
     }
+
+    public static SerializableDataWatcher LoadFromJson()
+    {
+        string filePath = Application.dataPath + "/InventoryData.json";
+        Debug.Log(filePath);
+        string playerData = System.IO.File.ReadAllText(filePath);
+        Debug.Log("Saved!");
+        return JsonUtility.FromJson<SerializableDataWatcher>(playerData);
+    }
 }

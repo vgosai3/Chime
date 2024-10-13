@@ -114,4 +114,24 @@ public class PlayerInventoryComponent : MonoBehaviour
     {
         return items;
     }
+
+    public int[] getItemsSerialized()
+    {
+        int[] returnArr = new int[SlotCount];
+        for (int i = 0; i < SlotCount; i++)
+        { 
+            returnArr[i] = (items[i] == null) ? (int)Item.None : items[i].getID();
+        }
+        return returnArr;
+    }
+
+    public void updateItemsSerialized(int[] id)
+    {
+        for (int i = 0; i < SlotCount; i++)
+        {
+            items[i] = null; //todo - when we have a consistent way to make AItems via storing the prefabs somewhere
+            Debug.Log("Item " + i + " is " + id[i]);
+        }
+    }
+
 }
