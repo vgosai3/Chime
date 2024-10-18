@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     [SerializeField] float MaxHitPoints = 100f;
     public float HitPoints = 0f;
 
+    //dialogue
+    [SerializeField] float talkDistance = 2;
+    private bool inConversation;
     //Movement relative to camera
     public Transform cameraTransform;
 
@@ -38,6 +41,7 @@ public class Player : MonoBehaviour
     {
         bool primaryAction = Input.GetButtonDown("PrimaryAction");
         bool interact = Input.GetButtonDown("Interact");
+        bool talk = Input.GetButtonDown("Talk");
 
         //Temp buttonchecks?
         bool dropItem = Input.GetKeyDown("g");
@@ -87,6 +91,10 @@ public class Player : MonoBehaviour
         {
             playerInventoryComponent.SelectItemByIndex(5);
         }
+        if (talk) 
+        {
+            DialogueInteract();
+        }
     }
     public void FixedUpdate()
     {
@@ -119,5 +127,45 @@ public class Player : MonoBehaviour
     public void PlayerDeath()
     {
         deathScreenGUI.ShowDeathScreen();
+    }
+
+    public void DialogueInteract() 
+    {
+        if (inConversation)
+        {
+            DialogueBoxController.instance.SkipLine();
+        }
+        else
+        {
+            if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, talkDistance))
+            {
+                if (hitInfo.collider.gameObject.TryGetComponent(out NPC npc))
+                {
+                    DialogueBoxController.instance.StartDialogue(npc.dialogueAsset, npc.StartDialoguePosition, npc.npcName);
+                }
+            }
+        }
+    }
+
+    public void JoinConversation() 
+    {
+        inConversation = true;
+    }
+
+    public void LeaveConversation()
+    {
+        inConversation = false;
+    }
+
+    private void OnEnable()
+    {
+        DialogueBoxController.OnDialogueStarted += JoinConversation;
+        DialogueBoxController.OnDialogueEnded += LeaveConversation;
+    }
+
+    private void OnDisable()
+    {
+        DialogueBoxController.OnDialogueStarted -= JoinConversation;
+        DialogueBoxController.OnDialogueEnded -= LeaveConversation;
     }
 }
