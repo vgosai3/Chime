@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private CharacterMovementComponent characterMovementComponent;
     private InteractorComponent interactorComponent;
     private PlayerInventoryComponent playerInventoryComponent;
+    private bool hasLoaded = false;
     public DeathScreenGUI deathScreenGUI;
 
     //temp, need to fix HitPoints to be private?
@@ -35,10 +36,22 @@ public class Player : MonoBehaviour
         characterMovementComponent = this.GetComponent<CharacterMovementComponent>();
         interactorComponent = this.GetComponent<InteractorComponent>();
         playerInventoryComponent = this.GetComponent<PlayerInventoryComponent>();
+
+        Globals.player = this;
+
+        //Save File Fixing
+        Debug.Log(Globals.playerLocation);
+        this.transform.position = Globals.playerLocation;
+        Debug.Log(this.transform.position);
+        Debug.Log("Player position updated");
+        Physics.SyncTransforms(); //fix position for character controller
+        
         HitPoints = MaxHitPoints;
     }
     public void Update()
     {
+        //Debug.Log(Globals.player.characterMovementComponent);
+
         bool primaryAction = Input.GetButtonDown("PrimaryAction");
         bool interact = Input.GetButtonDown("Interact");
         bool talk = Input.GetButtonDown("Talk");
@@ -91,13 +104,17 @@ public class Player : MonoBehaviour
         {
             playerInventoryComponent.SelectItemByIndex(5);
         }
+        Globals.player = this;
+        Globals.SaveFileUpdate();
         if (talk) 
         {
             DialogueInteract();
         }
     }
+
     public void FixedUpdate()
     {
+        
         //Eventually just smooth input yourself
         Vector2 smoothedMovement = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1.0f);
         Vector2 rawMovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -167,5 +184,15 @@ public class Player : MonoBehaviour
     {
         DialogueBoxController.OnDialogueStarted -= JoinConversation;
         DialogueBoxController.OnDialogueEnded -= LeaveConversation;
+    }
+
+    public int[] getPlayerInventorySerialized()
+    {
+        return playerInventoryComponent.getItemsSerialized();
+    }
+
+    public void updatePlayerInventory(int[] id)
+    {
+        playerInventoryComponent.updateItemsSerialized(id);
     }
 }

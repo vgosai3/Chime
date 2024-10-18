@@ -23,7 +23,8 @@ public enum Item
 {
     None,
     Dagger,
-    Sword
+    Sword,
+    Turret
 }
 
 /// <summary>
