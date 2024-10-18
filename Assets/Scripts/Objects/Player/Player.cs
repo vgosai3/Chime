@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
     private CharacterMovementComponent characterMovementComponent;
     private InteractorComponent interactorComponent;
     private PlayerInventoryComponent playerInventoryComponent;
+    public DeathScreenGUI deathScreenGUI;
 
-    //temp
-    public float HitPoints;
+    //temp, need to fix HitPoints to be private?
+    [SerializeField] float MaxHitPoints = 100f;
+    public float HitPoints = 0f;
 
     //Movement relative to camera
     public Transform cameraTransform;
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour
         characterMovementComponent = this.GetComponent<CharacterMovementComponent>();
         interactorComponent = this.GetComponent<InteractorComponent>();
         playerInventoryComponent = this.GetComponent<PlayerInventoryComponent>();
+        HitPoints = MaxHitPoints;
     }
     public void Update()
     {
@@ -98,5 +101,23 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         HitPoints -= damage;
+        if (HitPoints <= 0) {
+            PlayerDeath();
+        }
+    }
+    // Basic implementation for player health
+    public void UpdateHealth(float mod) {
+        HitPoints += MaxHitPoints;
+
+        if (HitPoints > MaxHitPoints) {
+            HitPoints = MaxHitPoints;
+        } else if (HitPoints <= 0f) {
+            HitPoints = 0f;
+            PlayerDeath();
+        }
+    }
+    public void PlayerDeath()
+    {
+        deathScreenGUI.ShowDeathScreen();
     }
 }
