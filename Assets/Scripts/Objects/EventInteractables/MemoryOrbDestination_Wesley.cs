@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 
@@ -8,7 +9,7 @@ using UnityEngine;
 public class MemoryOrbDestination_Wesley : AInteractableComponent
 {
     public Transform memOrbReceiver;
-    public GameObject currentNPC;
+    public GameObject itemPrefab;
     public GameObject currentObj;
     public GameObject partnerObj;
 
@@ -28,6 +29,14 @@ public class MemoryOrbDestination_Wesley : AInteractableComponent
     }
     private IEnumerator WaitAndTeleport(GameObject interactor)
     {
+        if (sender)
+        {
+            SceneManager.LoadScene("Exposition Orb Layout", LoadSceneMode.Additive);
+        }
+        else
+        {
+            Instantiate(itemPrefab, memOrbReceiver.position + new Vector3(7, 0.5f , 0), Quaternion.identity);
+        }
         yield return new WaitForSeconds(pauseCount);
         interactor.SetActive(false);
         interactor.transform.position = memOrbReceiver.position;
@@ -35,8 +44,7 @@ public class MemoryOrbDestination_Wesley : AInteractableComponent
 
         if (sender)
         {
-            //Spawns new NPC.
-            Instantiate(currentNPC, memOrbReceiver.position + new Vector3(7, 0, 0), Quaternion.identity);
+
             Globals.inOrb = true;
             //Hides the memory orb
             currentObj.SetActive(false);
@@ -44,6 +52,7 @@ public class MemoryOrbDestination_Wesley : AInteractableComponent
         else
         {
             Globals.inOrb = false;
+            SceneManager.UnloadSceneAsync("Exposition Orb Layout");
             //Removes the memory orb and exit object from the game.
             Destroy(partnerObj);
             Destroy(currentObj);
