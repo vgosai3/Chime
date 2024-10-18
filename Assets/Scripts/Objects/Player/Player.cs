@@ -158,7 +158,8 @@ public class Player : MonoBehaviour
             {
                 if (hitInfo.collider.gameObject.TryGetComponent(out NPC npc))
                 {
-                    DialogueBoxController.instance.StartDialogue(npc.dialogueAsset, npc.StartDialoguePosition, npc.npcName);
+                    // Mysterious Man here, added ".dialogue" to first param to make it a string[]
+                    DialogueBoxController.instance.StartDialogue(npc.dialogueAsset.dialogue, npc.StartDialoguePosition, npc.npcName);
                 }
             }
         }

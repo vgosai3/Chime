@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
 
     private readonly float minDist = 5f;
     private readonly float maxDist = 10f;
-    private readonly float spawnRate = 1f;
+    private float spawnRate = 1f;
     private float _nextSpawnTime;
 
     // Start is called before the first frame update

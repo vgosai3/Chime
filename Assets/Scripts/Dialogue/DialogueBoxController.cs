@@ -2,6 +2,7 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class DialogueBoxController : MonoBehaviour
 {
