@@ -50,6 +50,13 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    //Play button functionality take to level 1
+    public void PlayWithSave()
+    { 
+        Globals.LoadSave();
+        PlayGame();
+    }
+
     //Quit button functionality
     public void QuitGame()
     {

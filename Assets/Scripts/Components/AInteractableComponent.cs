@@ -7,6 +7,7 @@ using UnityEngine;
 public abstract class AInteractableComponent : MonoBehaviour
 {
     public Collider InteractableArea;
+
     public virtual void Reset()
     {
         InteractableArea = this.GetComponent<Collider>();

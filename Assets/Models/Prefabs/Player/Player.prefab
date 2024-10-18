@@ -124,7 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640afdc3c428f8d47a052c8ccfe04681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathScreenGUI: {fileID: 0}
+  MaxHitPoints: 0
   HitPoints: 0
+  cameraTransform: {fileID: 0}
 --- !u!114 &8678678667304999913
 MonoBehaviour:
   m_ObjectHideFlags: 0

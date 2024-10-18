@@ -12,10 +12,16 @@ public class Player : MonoBehaviour
     private CharacterMovementComponent characterMovementComponent;
     private InteractorComponent interactorComponent;
     private PlayerInventoryComponent playerInventoryComponent;
+    private bool hasLoaded = false;
+    public DeathScreenGUI deathScreenGUI;
 
-    //temp
-    public float HitPoints;
+    //temp, need to fix HitPoints to be private?
+    [SerializeField] float MaxHitPoints = 100f;
+    public float HitPoints = 0f;
 
+    //dialogue
+    [SerializeField] float talkDistance = 2;
+    private bool inConversation;
     //Movement relative to camera
     public Transform cameraTransform;
 
@@ -30,11 +36,25 @@ public class Player : MonoBehaviour
         characterMovementComponent = this.GetComponent<CharacterMovementComponent>();
         interactorComponent = this.GetComponent<InteractorComponent>();
         playerInventoryComponent = this.GetComponent<PlayerInventoryComponent>();
+
+        Globals.player = this;
+
+        //Save File Fixing
+        Debug.Log(Globals.playerLocation);
+        this.transform.position = Globals.playerLocation;
+        Debug.Log(this.transform.position);
+        Debug.Log("Player position updated");
+        Physics.SyncTransforms(); //fix position for character controller
+        
+        HitPoints = MaxHitPoints;
     }
     public void Update()
     {
+        //Debug.Log(Globals.player.characterMovementComponent);
+
         bool primaryAction = Input.GetButtonDown("PrimaryAction");
         bool interact = Input.GetButtonDown("Interact");
+        bool talk = Input.GetButtonDown("Talk");
 
         //Temp buttonchecks?
         bool dropItem = Input.GetKeyDown("g");
@@ -86,9 +106,17 @@ public class Player : MonoBehaviour
         {
             playerInventoryComponent.SelectItemByIndex(5);
         }
+        Globals.player = this;
+        Globals.SaveFileUpdate();
+        if (talk) 
+        {
+            DialogueInteract();
+        }
     }
+
     public void FixedUpdate()
     {
+        
         //Eventually just smooth input yourself
         Vector2 smoothedMovement = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1.0f);
         Vector2 rawMovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -100,5 +128,73 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         HitPoints -= damage;
+        if (HitPoints <= 0) {
+            PlayerDeath();
+        }
+    }
+    // Basic implementation for player health
+    public void UpdateHealth(float mod) {
+        HitPoints += MaxHitPoints;
+
+        if (HitPoints > MaxHitPoints) {
+            HitPoints = MaxHitPoints;
+        } else if (HitPoints <= 0f) {
+            HitPoints = 0f;
+            PlayerDeath();
+        }
+    }
+    public void PlayerDeath()
+    {
+        deathScreenGUI.ShowDeathScreen();
+    }
+
+    public void DialogueInteract() 
+    {
+        if (inConversation)
+        {
+            DialogueBoxController.instance.SkipLine();
+        }
+        else
+        {
+            if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, talkDistance))
+            {
+                if (hitInfo.collider.gameObject.TryGetComponent(out NPC npc))
+                {
+                    DialogueBoxController.instance.StartDialogue(npc.dialogueAsset, npc.StartDialoguePosition, npc.npcName);
+                }
+            }
+        }
+    }
+
+    public void JoinConversation() 
+    {
+        inConversation = true;
+    }
+
+    public void LeaveConversation()
+    {
+        inConversation = false;
+    }
+
+    private void OnEnable()
+    {
+        DialogueBoxController.OnDialogueStarted += JoinConversation;
+        DialogueBoxController.OnDialogueEnded += LeaveConversation;
+    }
+
+    private void OnDisable()
+    {
+        DialogueBoxController.OnDialogueStarted -= JoinConversation;
+        DialogueBoxController.OnDialogueEnded -= LeaveConversation;
+    }
+
+    public int[] getPlayerInventorySerialized()
+    {
+        return playerInventoryComponent.getItemsSerialized();
+    }
+
+    public void updatePlayerInventory(int[] id)
+    {
+        playerInventoryComponent.updateItemsSerialized(id);
     }
 }

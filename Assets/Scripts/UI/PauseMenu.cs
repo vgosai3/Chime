@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
 
-    public static bool isPaused = false;
     public GameObject pauseMenu;
 
     // Update is called once per frame
@@ -14,7 +13,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
+            if (Globals.isPaused)
             {
                 Resume();
             } else 
@@ -30,7 +29,7 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Resuming game...");
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
-        isPaused = false;
+        Globals.isPaused = false;
     }
 
     //If we want to add a button for pause,
@@ -40,7 +39,7 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Pausing game...");
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
-        isPaused = true;
+        Globals.isPaused = true;
     }
 
     public void LoadMenu()
