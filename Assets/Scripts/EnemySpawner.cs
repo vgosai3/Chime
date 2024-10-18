@@ -6,10 +6,12 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    [SerializeField] private float SPAWN_RATE_DAY = 1f; // playtest first   
+    [SerializeField] private float SPAWN_RATE_NIGHT = 5f; // playtest first   
 
     private readonly float minDist = 5f;
     private readonly float maxDist = 10f;
-    private readonly float spawnRate = 1f;
+    private float spawnRate = 1f;
     private float _nextSpawnTime;
 
     // Start is called before the first frame update
@@ -29,6 +31,7 @@ public class EnemySpawner : MonoBehaviour
             Instantiate(enemyPrefab, RandomPos(), Quaternion.identity);
         }
 
+        UpdateSpawnRate();
     }
 
     private Vector3 RandomPos()
@@ -39,4 +42,11 @@ public class EnemySpawner : MonoBehaviour
         return new Vector3((float)(Math.Cos(angle) * distance), 0.5f, (float)(Math.Sin(angle) * distance));
     }
 
+    private void UpdateSpawnRate() {
+        if (Globals.saveData.isDaytime) {
+            spawnRate = SPAWN_RATE_DAY;
+        } else {
+            spawnRate = SPAWN_RATE_NIGHT;
+        }
+    }
 }
