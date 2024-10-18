@@ -172,7 +172,7 @@ public abstract class Enemy : MonoBehaviour
     private void GenerateDamageText(float damage)
     {
         // Create new damage text object above enemy position
-        GameObject damageText = Instantiate(DamageText, transform.position + Vector3.up * 3, Quaternion.identity);
+        GameObject damageText = Instantiate(DamageText, transform.position + Vector3.up * 3, Constants.GetCameraAngles());
         // Set damage number
         DamageNumber damageNumber = damageText.GetComponent<DamageNumber>();
         if (damageNumber != null)

@@ -887,7 +887,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1491155715}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2003,11 +2003,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e4ebc69d8770041bda3ceb905fdf64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 0}
-  resolutionDropdown: {fileID: 0}
-  qualityDropdown: {fileID: 0}
-  volumeSlider: {fileID: 0}
-  fullscreenToggle: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: cbef2b83b290748839cb08e5a0083f30, type: 2}
+  resolutionDropdown: {fileID: 855027128}
+  qualityDropdown: {fileID: 997556389}
+  volumeSlider: {fileID: 1023358}
+  fullscreenToggle: {fileID: 1656929366}
 --- !u!1 &855027126
 GameObject:
   m_ObjectHideFlags: 0
@@ -5071,7 +5071,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1457553292}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6

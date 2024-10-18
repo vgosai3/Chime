@@ -32,6 +32,7 @@ public class MemoryOrbDestination_Wesley : AInteractableComponent
         interactor.SetActive(false);
         interactor.transform.position = memOrbReceiver.position;
         interactor.SetActive(true);
+        partnerObj.SetActive(true);
 
         if (sender)
         {

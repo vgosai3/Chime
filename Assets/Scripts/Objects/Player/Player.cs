@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
         bool numberKey5 = Input.GetKeyDown("5");
         bool numberKey6 = Input.GetKeyDown("6");
 
+        bool dash = Input.GetKeyDown("space");
+
         if (primaryAction)
         {
             playerInventoryComponent.UseActiveItemPrimaryAction();
