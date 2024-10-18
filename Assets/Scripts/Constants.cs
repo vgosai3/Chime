@@ -24,7 +24,9 @@ public enum Item
     None,
     Dagger,
     Sword,
-    Turret
+    Turret,
+    ItemTest,
+    TurretItemTest
 }
 
 /// <summary>
