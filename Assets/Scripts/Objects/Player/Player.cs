@@ -13,10 +13,15 @@ public class Player : MonoBehaviour
     private InteractorComponent interactorComponent;
     private PlayerInventoryComponent playerInventoryComponent;
     private bool hasLoaded = false;
+    public DeathScreenGUI deathScreenGUI;
 
-    //temp
-    public float HitPoints;
+    //temp, need to fix HitPoints to be private?
+    [SerializeField] float MaxHitPoints = 100f;
+    public float HitPoints = 0f;
 
+    //dialogue
+    [SerializeField] float talkDistance = 2;
+    private bool inConversation;
     //Movement relative to camera
     public Transform cameraTransform;
 
@@ -31,6 +36,7 @@ public class Player : MonoBehaviour
         characterMovementComponent = this.GetComponent<CharacterMovementComponent>();
         interactorComponent = this.GetComponent<InteractorComponent>();
         playerInventoryComponent = this.GetComponent<PlayerInventoryComponent>();
+
         Globals.player = this;
 
         //Save File Fixing
@@ -39,7 +45,8 @@ public class Player : MonoBehaviour
         Debug.Log(this.transform.position);
         Debug.Log("Player position updated");
         Physics.SyncTransforms(); //fix position for character controller
-
+        
+        HitPoints = MaxHitPoints;
     }
     public void Update()
     {
@@ -47,6 +54,7 @@ public class Player : MonoBehaviour
 
         bool primaryAction = Input.GetButtonDown("PrimaryAction");
         bool interact = Input.GetButtonDown("Interact");
+        bool talk = Input.GetButtonDown("Talk");
 
         //Temp buttonchecks?
         bool dropItem = Input.GetKeyDown("g");
@@ -98,6 +106,10 @@ public class Player : MonoBehaviour
         }
         Globals.player = this;
         Globals.SaveFileUpdate();
+        if (talk) 
+        {
+            DialogueInteract();
+        }
     }
 
     public void FixedUpdate()
@@ -114,6 +126,64 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         HitPoints -= damage;
+        if (HitPoints <= 0) {
+            PlayerDeath();
+        }
+    }
+    // Basic implementation for player health
+    public void UpdateHealth(float mod) {
+        HitPoints += MaxHitPoints;
+
+        if (HitPoints > MaxHitPoints) {
+            HitPoints = MaxHitPoints;
+        } else if (HitPoints <= 0f) {
+            HitPoints = 0f;
+            PlayerDeath();
+        }
+    }
+    public void PlayerDeath()
+    {
+        deathScreenGUI.ShowDeathScreen();
+    }
+
+    public void DialogueInteract() 
+    {
+        if (inConversation)
+        {
+            DialogueBoxController.instance.SkipLine();
+        }
+        else
+        {
+            if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, talkDistance))
+            {
+                if (hitInfo.collider.gameObject.TryGetComponent(out NPC npc))
+                {
+                    DialogueBoxController.instance.StartDialogue(npc.dialogueAsset, npc.StartDialoguePosition, npc.npcName);
+                }
+            }
+        }
+    }
+
+    public void JoinConversation() 
+    {
+        inConversation = true;
+    }
+
+    public void LeaveConversation()
+    {
+        inConversation = false;
+    }
+
+    private void OnEnable()
+    {
+        DialogueBoxController.OnDialogueStarted += JoinConversation;
+        DialogueBoxController.OnDialogueEnded += LeaveConversation;
+    }
+
+    private void OnDisable()
+    {
+        DialogueBoxController.OnDialogueStarted -= JoinConversation;
+        DialogueBoxController.OnDialogueEnded -= LeaveConversation;
     }
 
     public int[] getPlayerInventorySerialized()
