@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 68d598c234853a94caa238570681a42b
+  - enabled: 1
+    path: Assets/Scenes/Wesley/Exposition Orb Layout.unity
+    guid: 6ab19dbc6d5e11143b9e7c32c09e2bea
   m_configObjects: {}
