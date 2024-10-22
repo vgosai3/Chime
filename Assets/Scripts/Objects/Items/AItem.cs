@@ -38,6 +38,10 @@ public abstract class AItem : AInteractableComponent
         interactorInventory.AddItem(this);
         inInventory = true;
         this.GetComponent<MeshRenderer>().enabled = false;
+        foreach (MeshRenderer renderer in this.GetComponentsInChildren<MeshRenderer>())
+        {
+            renderer.enabled = false;
+        }
         Debug.Log(this.name + " has been picked up.");
     }
     public virtual void Drop(Vector3 dropPosition)

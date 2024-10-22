@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public DeathScreenGUI deathScreenGUI;
 
     //temp, need to fix HitPoints to be private?
-    [SerializeField] float MaxHitPoints = 100f;
+    public float MaxHitPoints = 100f;
     public float HitPoints = 0f;
 
     //dialogue

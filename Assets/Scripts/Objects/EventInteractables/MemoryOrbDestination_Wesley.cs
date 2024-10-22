@@ -30,14 +30,14 @@ public class MemoryOrbDestination_Wesley : AInteractableComponent
     {
         yield return new WaitForSeconds(pauseCount);
         interactor.SetActive(false);
-        interactor.transform.position = memOrbReceiver.position;
+        // interactor.transform.position = memOrbReceiver.position;
         interactor.SetActive(true);
         partnerObj.SetActive(true);
 
         if (sender)
         {
             //Spawns new NPC.
-            Instantiate(currentNPC, memOrbReceiver.position + new Vector3(7, 0, 0), Quaternion.identity);
+            Instantiate(currentNPC, transform.position + new Vector3(7, -0.5f, 0), Quaternion.identity);
             Globals.inOrb = true;
             //Hides the memory orb
             currentObj.SetActive(false);

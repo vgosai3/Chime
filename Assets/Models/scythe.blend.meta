@@ -3,7 +3,27 @@ guid: faf089c88584a754a89deffb77e04714
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blade
+    second: {fileID: 2100000, guid: 0935933126eebe444a639fccb127dba5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ferrule
+    second: {fileID: 2100000, guid: 0935933126eebe444a639fccb127dba5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gem
+    second: {fileID: 2100000, guid: 7ae36c0f16114ca40a5e7376bb32fd98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Handle
+    second: {fileID: 2100000, guid: b5db336b444c3294f98820561bb7e461, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

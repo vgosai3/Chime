@@ -24,6 +24,7 @@ public enum Item
     None,
     Dagger,
     Sword,
+    Scythe,
     Turret,
     ItemTest,
     TurretItemTest
