@@ -28,22 +28,42 @@ public class PlayerInventoryComponent : MonoBehaviour
         }
 
     }
+    private void TryEquip(int itemIndex)
+    {
+        if (items[itemIndex] != null)
+        {
+            items[itemIndex].Equip();
+        }
+    }
+    private void TryUnequip(int itemIndex)
+    {
+        if (items[itemIndex] != null)
+        {
+            items[itemIndex].Unequip();
+        }
+    }
     public void SelectNextItem()
     {
+        TryUnequip(activeItemIndex);
         activeItemIndex = (activeItemIndex + 1) % SlotCount;
         inventoryGUI.UpdateActiveItemBorder(activeItemIndex);
+        TryEquip(activeItemIndex);
     }
     public void SelectPrevItem()
     {
+        TryUnequip(activeItemIndex);
         activeItemIndex = (activeItemIndex - 1) % SlotCount;
         inventoryGUI.UpdateActiveItemBorder(activeItemIndex);
+        TryEquip(activeItemIndex);
     }
     public void SelectItemByIndex(int itemIndex)
     {
         if (itemIndex < SlotCount && itemIndex >= 0)
         {
+            TryUnequip(activeItemIndex);
             activeItemIndex = itemIndex;
-            inventoryGUI.UpdateActiveItemBorder(activeItemIndex);        
+            inventoryGUI.UpdateActiveItemBorder(activeItemIndex);
+            TryEquip(activeItemIndex);
         }
         else
         {
@@ -76,6 +96,7 @@ public class PlayerInventoryComponent : MonoBehaviour
             items[itemIndex] = item;
             Debug.Log(item.name + " successfully added to the inventory!");
             inventoryGUI.AddItem(item, itemIndex);
+            TryEquip(activeItemIndex);
             return itemIndex;
         }
         else

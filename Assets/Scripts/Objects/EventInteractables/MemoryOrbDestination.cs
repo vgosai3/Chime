@@ -27,7 +27,7 @@ public class MemoryOrbDestination : AInteractableComponent
     {
         yield return new WaitForSeconds(pauseCount);
         interactor.SetActive(false);
-        interactor.transform.position = memOrbReceiver.position;
+        // interactor.transform.position = transform.position;
         interactor.SetActive(true);
         interacting = false;
 

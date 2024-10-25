@@ -6,13 +6,13 @@ public class MinimapScript : MonoBehaviour
 {
     public Transform player;
 
-    void LateUpdate()
-    {
-        Vector3 newPosition = player.position;
-        newPosition.y = transform.position.y;
-        transform.position = newPosition;
+    [SerializeField]
+    private float Height = 10.0f;
 
-        transform.rotation = Quaternion.Euler(90f, player.eulerAngles.y, 0f);
+    void FixedUpdate()
+    {
+        transform.position = player.position + new Vector3(0, Height, 0);
+        transform.rotation = Quaternion.Euler(90f, Constants.GetCameraAngles().eulerAngles.y, 0f);
     }
 
 }

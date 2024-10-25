@@ -24,7 +24,10 @@ public enum Item
     None,
     Dagger,
     Sword,
-    Turret
+    Scythe,
+    Turret,
+    ItemTest,
+    TurretItemTest
 }
 
 /// <summary>
@@ -36,4 +39,19 @@ public enum NonPlayerCharacters
     Farmer,
     Blacksmith,
     King
+}
+
+public class Constants
+{
+    /// <summary>
+    /// This function is used to retrieve the angle of the camera. This can be used to
+    /// position text properly such that it appears parallel to the camera, rather than
+    /// slanted
+    /// </summary>
+    /// <returns>A quaternion representing the angle of the camera</returns>
+    public static Quaternion GetCameraAngles()
+    {
+        SmoothCameraFollow follow = Camera.main.GetComponent<SmoothCameraFollow>();
+        return Quaternion.Euler((float) follow.VerticalAngle, (float) follow.HorizontalAngle, 0.0f);
+    }
 }

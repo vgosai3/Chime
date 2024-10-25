@@ -9,6 +9,8 @@ public class Turret : MonoBehaviour
     public float fireRate = 1.2f;
     private float _lastFireTime;
 
+    public float AttackRadius = 15f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +25,12 @@ public class Turret : MonoBehaviour
             GameObject closest = GetClosestEnemy();
             if (closest != null)
             {
-                Rigidbody r = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-                r.velocity = (closest.transform.position - transform.position).normalized * 10;
-                _lastFireTime = Time.time;
+                if (Vector3.Distance(transform.position, closest.transform.position) < AttackRadius)
+                {
+                    Rigidbody r = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+                    r.velocity = (closest.transform.position - transform.position).normalized * 10;
+                    _lastFireTime = Time.time;
+                }
             }
         }
     }

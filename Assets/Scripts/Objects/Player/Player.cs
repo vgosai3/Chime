@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour
     public DeathScreenGUI deathScreenGUI;
 
     //temp, need to fix HitPoints to be private?
-    [SerializeField] float MaxHitPoints = 100f;
+    public float MaxHitPoints = 100f;
     public float HitPoints = 0f;
 
     //dialogue
@@ -65,6 +66,8 @@ public class Player : MonoBehaviour
         bool numberKey5 = Input.GetKeyDown("5");
         bool numberKey6 = Input.GetKeyDown("6");
 
+        bool dash = Input.GetKeyDown("space");
+
         if (primaryAction)
         {
             playerInventoryComponent.UseActiveItemPrimaryAction();
@@ -104,6 +107,10 @@ public class Player : MonoBehaviour
         {
             playerInventoryComponent.SelectItemByIndex(5);
         }
+        if (dash)
+        {
+            StartCoroutine(characterMovementComponent.PlayerDash());
+        }
         Globals.player = this;
         Globals.SaveFileUpdate();
         if (talk) 
@@ -114,12 +121,11 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
-        
-        //Eventually just smooth input yourself
         Vector2 smoothedMovement = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1.0f);
         Vector2 rawMovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Transform cameraTransform = Camera.main.transform;
         characterMovementComponent.MovePlayerRelativeToCamera(new Vector3(smoothedMovement.x, 0.0f, smoothedMovement.y), new Vector3(rawMovementInput.x, 0.0f, rawMovementInput.y), cameraTransform);
+        
     }
 
     // Basic implementation for taking damage, can modify later
@@ -158,7 +164,7 @@ public class Player : MonoBehaviour
             {
                 if (hitInfo.collider.gameObject.TryGetComponent(out NPC npc))
                 {
-                    DialogueBoxController.instance.StartDialogue(npc.dialogueAsset, npc.StartDialoguePosition, npc.npcName);
+                    DialogueBoxController.instance.StartDialogue(npc.dialogueAsset.dialogue, npc.StartDialoguePosition, npc.npcName);
                 }
             }
         }

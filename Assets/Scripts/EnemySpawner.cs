@@ -21,12 +21,16 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > _nextSpawnTime)
+        /*if (Time.time > _nextSpawnTime)
         {
             _nextSpawnTime += spawnRate;
             int LayerMobs = LayerMask.NameToLayer("Mobs");
             //gameObject.layer = LayerMobs
             Instantiate(enemyPrefab, RandomPos(), Quaternion.identity);
+        }*/
+        if (GameObject.FindWithTag("Enemy") == null)
+        {
+            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
         }
 
     }
