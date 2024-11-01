@@ -19,9 +19,9 @@ CLOCK CLASS USAGE
 
 public class Clock : MonoBehaviour
 {
-    // Timing of Days
-    [SerializeField] private long SECONDS_PER_DAY   = 100; // should be static but
-    [SerializeField] private long SECONDS_PER_NIGHT = 100; // playtest first   
+
+    public GameObject arm;
+    float r;
 
     // Pausing
     public void Pause()
@@ -54,29 +54,37 @@ public class Clock : MonoBehaviour
         Globals.timer += Time.deltaTime;
 
         // Switch Day/Night if timer has reached the end
-        if (Globals.saveData.isDaytime) 
+        if (Globals.isDaytime) 
         {
             // Switch to Night if Day ended
-            bool dayEnd = Globals.timer >= SECONDS_PER_DAY;
+            bool dayEnd = Globals.timer >= Globals.SECONDS_PER_DAY;
             if (dayEnd)
             {
                 // Change to night, Reset timer
                 // DO NOT increment day because night has not ended.
-                Globals.saveData.isDaytime = false;
+                Globals.isDaytime = false;
                 Globals.timer = 0;
             }
         } else 
         {
             // Switch to Day if Night ended
-            bool nightEnd = Globals.timer >= SECONDS_PER_NIGHT;
+            bool nightEnd = Globals.timer >= Globals.SECONDS_PER_NIGHT;
             if (nightEnd)
             {
                 // Change to day, Increment day, and Reset timer
-                Globals.saveData.isDaytime = true;
+                Globals.isDaytime = true;
                 Globals.dayCounter++;
                 Globals.timer = 0;
             }
         }
+        rotateHand();
 
+    }
+
+    private void rotateHand()
+    {
+        float totalTime = (Globals.SECONDS_PER_DAY + Globals.SECONDS_PER_NIGHT);
+        float angle = -(Globals.timer / totalTime) * 360 - ((Globals.isDaytime) ? 0 : 180);
+        arm.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
