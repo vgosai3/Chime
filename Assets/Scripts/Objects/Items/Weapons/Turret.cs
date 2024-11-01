@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Turret : AItem
 {
     // Bullet object
     public GameObject bullet;
@@ -50,5 +50,12 @@ public class Turret : MonoBehaviour
             }
         }
         return closestObject;
+    }
+
+    public override void PrimaryAction()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        var dropPos = player.transform.position + player.transform.forward * 2.0f;
+        currentInv.DropItem();
     }
 }
