@@ -8,9 +8,14 @@ public static class Globals //Separate class from serializable bc a) it's static
     [SerializeField] public static bool inOrb = false;
     [SerializeField] public static int currentNPC = 0;
     [SerializeField] public static bool isPaused = false;
-    [SerializeField] public static bool isDaytime = false;
+    [SerializeField] public static bool isDaytime = true;
     [SerializeField] public static long dayCounter = 0;
     [SerializeField] public static float timer = 0;
+
+    // Timing of Days
+    [SerializeField] public static long SECONDS_PER_DAY = 100; // should be static but
+    [SerializeField] public static long SECONDS_PER_NIGHT = 100; // playtest first
+
     [SerializeField] public static Player player = null;
     public static Vector3 playerLocation = Vector3.zero;
     public static int[] items = null;
