@@ -10,6 +10,7 @@ public abstract class AItem : AInteractableComponent
 {
     public Sprite ItemIcon;
     private bool inInventory;
+    protected PlayerInventoryComponent currentInv;
     private MeshRenderer meshRenderer;
     private int id;
 
@@ -26,10 +27,10 @@ public abstract class AItem : AInteractableComponent
     }
     public override void Interact(GameObject interactor)
     {
-        PlayerInventoryComponent interactorInventory = interactor.GetComponent<PlayerInventoryComponent>();
-        if (interactorInventory != null && inInventory == false)
+        currentInv = interactor.GetComponent<PlayerInventoryComponent>();
+        if (currentInv != null && inInventory == false)
         {
-            PickUp(interactorInventory);
+            PickUp(currentInv);
         }
     }
 

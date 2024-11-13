@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Turret : AItem
 {
     // Bullet object
     public GameObject bullet;
@@ -10,6 +10,9 @@ public class Turret : MonoBehaviour
     private float _lastFireTime;
 
     public float AttackRadius = 15f;
+
+    private GameObject _Closest;
+    public GameObject Closest { get { return _Closest; } }
 
     // Start is called before the first frame update
     void Start()
@@ -22,13 +25,13 @@ public class Turret : MonoBehaviour
     {
         if (Time.time - _lastFireTime >= fireRate)
         {
-            GameObject closest = GetClosestEnemy();
-            if (closest != null)
+            _Closest = GetClosestEnemy();
+            if (_Closest != null)
             {
-                if (Vector3.Distance(transform.position, closest.transform.position) < AttackRadius)
+                if (Vector3.Distance(transform.position, _Closest.transform.position) < AttackRadius)
                 {
                     Rigidbody r = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-                    r.velocity = (closest.transform.position - transform.position).normalized * 10;
+                    r.velocity = (_Closest.transform.position - transform.position).normalized * 10;
                     _lastFireTime = Time.time;
                 }
             }
@@ -50,5 +53,12 @@ public class Turret : MonoBehaviour
             }
         }
         return closestObject;
+    }
+
+    public override void PrimaryAction()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        var dropPos = player.transform.position + player.transform.forward * 2.0f;
+        currentInv.DropItem();
     }
 }

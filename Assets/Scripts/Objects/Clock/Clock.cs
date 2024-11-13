@@ -20,9 +20,6 @@ CLOCK CLASS USAGE
 public class Clock : MonoBehaviour
 {
 
-    public GameObject arm;
-    float r;
-
     // Pausing
     public void Pause()
     {
@@ -77,14 +74,5 @@ public class Clock : MonoBehaviour
                 Globals.timer = 0;
             }
         }
-        rotateHand();
-
-    }
-
-    private void rotateHand()
-    {
-        float totalTime = (Globals.SECONDS_PER_DAY + Globals.SECONDS_PER_NIGHT);
-        float angle = -(Globals.timer / totalTime) * 360 - ((Globals.isDaytime) ? 0 : 180);
-        arm.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }

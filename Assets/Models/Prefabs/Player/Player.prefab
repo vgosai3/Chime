@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 5868868263282380410}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   deathScreenGUI: {fileID: 0}
   MaxHitPoints: 0
   HitPoints: 0
+  talkDistance: 2
   cameraTransform: {fileID: 0}
 --- !u!114 &8678678667304999913
 MonoBehaviour:
@@ -142,6 +143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 5
   RotationSpeed: 0.2
+  DashSpeed: 10
+  DashDuration: 0.4
+  DashCooldown: 3
+  LastDash: 0
 --- !u!143 &5335818115854669901
 CharacterController:
   m_ObjectHideFlags: 0
