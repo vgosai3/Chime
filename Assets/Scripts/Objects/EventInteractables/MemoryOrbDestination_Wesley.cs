@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 
@@ -19,7 +20,7 @@ public class MemoryOrbDestination_Wesley : AInteractableComponent
     private bool interacting = false;
     public override void Interact(GameObject interactor)
     {
-        if (!interacting)
+        if (!interacting && bellMovement.Following)
         {
             interacting = true;//prevent spamming interact
             bellMovement.Hover(this.transform);
@@ -37,13 +38,19 @@ public class MemoryOrbDestination_Wesley : AInteractableComponent
         if (sender)
         {
             //Spawns new NPC.
-            Instantiate(currentNPC, transform.position + new Vector3(7, -0.5f, 0), Quaternion.identity);
+            /* Instantiate(currentNPC, transform.position + new Vector3(7, -0.5f, 0), Quaternion.identity);*/
+            SceneManager.LoadSceneAsync("Farmer Memory Orb");
+            // Reset timescale if returned from pause menu
+            Time.timeScale = 1f;
             Globals.inOrb = true;
             //Hides the memory orb
             currentObj.SetActive(false);
         }
         else
         {
+            SceneManager.LoadSceneAsync("Level");
+            // Reset timescale if returned from pause menu
+            Time.timeScale = 1f;
             Globals.inOrb = false;
             //Removes the memory orb and exit object from the game.
             Destroy(partnerObj);

@@ -41,11 +41,11 @@ public class Player : MonoBehaviour
         Globals.player = this;
 
         //Save File Fixing
-        Debug.Log(Globals.playerLocation);
+        /*Debug.Log(Globals.playerLocation);
         this.transform.position = Globals.playerLocation;
         Debug.Log(this.transform.position);
         Debug.Log("Player position updated");
-        Physics.SyncTransforms(); //fix position for character controller
+        Physics.SyncTransforms(); //fix position for character controller*/
         
         HitPoints = MaxHitPoints;
     }

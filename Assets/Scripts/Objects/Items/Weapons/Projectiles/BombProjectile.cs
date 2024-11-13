@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BombProjectile : MonoBehaviour
 {
-    public float explosionRadius = 5.0f;
+    public float explosionRadius = 30.0f;
     public float damageAmount = 50.0f;
     private readonly float timeAlive = 5f;
     private float _spawnTime;
@@ -21,9 +21,16 @@ public class BombProjectile : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Explode();
+        if (other.CompareTag("Floor"))
+        {
+            Debug.Log("Is floor");
+        }
+        if (other.CompareTag("Enemy") || other.CompareTag("Floor"))
+        {
+            Explode();
+        }
     }
 
     private void Explode()
@@ -31,6 +38,7 @@ public class BombProjectile : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider nearbyObject in colliders)
         {
+            //Debug.Log(nearbyObject.tag);
             if (nearbyObject.CompareTag("Enemy"))
             {
                 Enemy enemy = nearbyObject.GetComponent<Enemy>();
@@ -40,7 +48,7 @@ public class BombProjectile : MonoBehaviour
                 }
             }
         }
+        Debug.Log("Destroy Projectile");
         Destroy(gameObject);
     }
-
 }

@@ -11,6 +11,9 @@ public class Turret : AItem
 
     public float AttackRadius = 15f;
 
+    private GameObject _Closest;
+    public GameObject Closest { get { return _Closest; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +25,13 @@ public class Turret : AItem
     {
         if (Time.time - _lastFireTime >= fireRate)
         {
-            GameObject closest = GetClosestEnemy();
-            if (closest != null)
+            _Closest = GetClosestEnemy();
+            if (_Closest != null)
             {
-                if (Vector3.Distance(transform.position, closest.transform.position) < AttackRadius)
+                if (Vector3.Distance(transform.position, _Closest.transform.position) < AttackRadius)
                 {
                     Rigidbody r = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-                    r.velocity = (closest.transform.position - transform.position).normalized * 10;
+                    r.velocity = (_Closest.transform.position - transform.position).normalized * 10;
                     _lastFireTime = Time.time;
                 }
             }

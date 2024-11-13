@@ -10,6 +10,8 @@ TagManager:
   - Projectile
   - Interactable
   - NPC
+  - Floor
+  - Barrier
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - Mobs
   - EventInteractables
   - NPCs
-  - 
+  - Floor
   - 
   - 
   - 

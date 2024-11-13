@@ -13,8 +13,8 @@ public static class Globals //Separate class from serializable bc a) it's static
     [SerializeField] public static float timer = 0;
 
     // Timing of Days
-    [SerializeField] public static long SECONDS_PER_DAY = 10; // should be static but
-    [SerializeField] public static long SECONDS_PER_NIGHT = 10; // playtest first
+    [SerializeField] public static long SECONDS_PER_DAY = 5; // should be static but
+    [SerializeField] public static long SECONDS_PER_NIGHT = 5; // playtest first
 
     [SerializeField] public static Player player = null;
     public static Vector3 playerLocation = Vector3.zero;

@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class BellMovement : MonoBehaviour
+public class BellMovement : AInteractableComponent
 {
     public Transform target;
+    public AudioSource BellAudio;
+    public float followSharpness = 0.05f;
+
     private readonly Vector3 Range = new Vector3(0f, 0f, -2f);
-    public float followSharpness = 0.005f;
 
+    [SerializeField]
     private float FloatHeight = 1.0f; //Wenwei cheated and took away read only to do the hovering
-    private readonly float FloatVariance = 0.2f;
-    private readonly float FloatSpeed = 1.5f;
+    [SerializeField]
+    private float FloatVariance = 0.2f;
+    [SerializeField]
+    private float FloatSpeed = 3f;
 
-    private bool teleporting = false;
+    private bool Teleporting = false;
+    public bool Following = false;
     private float pauseCount = 2f;
 
     // Start is called before the first frame updatew
@@ -24,15 +30,16 @@ public class BellMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Floating animation
-        transform.position =  new Vector3(transform.position.x, FloatVariance * Mathf.Sin(FloatSpeed * Time.time) + FloatHeight, transform.position.z);
     }
 
     private void LateUpdate()
     {
         // Follow character with delay
-        if(!teleporting)
+        if(Following && !Teleporting)
         {
+            // Floating animation
+            transform.position = new Vector3(transform.position.x, FloatVariance * Mathf.Sin(FloatSpeed * Time.time) + FloatHeight, transform.position.z);
+
             var magnitude = target.position + target.rotation.normalized * Range;
             transform.position += (magnitude - transform.position) * followSharpness;
         }//if teleporting, bell will not follow player
@@ -40,9 +47,8 @@ public class BellMovement : MonoBehaviour
 
     public void Hover(Transform Orb)
     {
-        teleporting = true;
-        FloatHeight += 2;
-        transform.position = Orb.position;
+        Teleporting = true;
+        transform.position = Orb.position + (Vector3.up * 2.0f);
         StartCoroutine(HoverAndWait());
     }//Hovering after orb interaction
 
@@ -50,8 +56,14 @@ public class BellMovement : MonoBehaviour
     private IEnumerator HoverAndWait()
     {
         yield return new WaitForSeconds(pauseCount);
-        teleporting = false;
-        FloatHeight -= 2;
+        Teleporting = false;
     }//waits pauseCount seconds before bell returns to normal
 
+    public override void Interact(GameObject interactor)
+    {
+        Debug.Log("Interacted with bell");
+        Debug.Log(Following);
+        Following = true;
+        BellAudio.Play();
+    }
 }
