@@ -12,6 +12,7 @@ TagManager:
   - NPC
   - Floor
   - Barrier
+  - Jester
   layers:
   - Default
   - TransparentFX
