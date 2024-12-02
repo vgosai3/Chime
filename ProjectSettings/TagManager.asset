@@ -12,6 +12,8 @@ TagManager:
   - NPC
   - Floor
   - Barrier
+  - Name
+  - Dialogue
   layers:
   - Default
   - TransparentFX

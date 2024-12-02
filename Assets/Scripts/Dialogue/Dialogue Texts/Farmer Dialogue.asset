@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbbb32557779e4043b7ca4ef0470528c, type: 3}
+  m_Name: Farmer Dialogue
+  m_EditorClassIdentifier: 
+  dialogue:
+  - "Farmer:Hey, missus! Rare to see anyone around except me n\u2019 my family nowadays.
+    You got somewhere to be or you got some time to spare to help an old man out?"
+  - Dahlia:Certainly.
+  - "Farmer:Thank you very much, then. If you\u2019d just take up that scythe right
+    there and get ta hacking at those crops. No need to be too careful about it,
+    most of \u2018em aren\u2019t good to eat anyways."
+  - Dahlia:What happened to the crops?
+  - "Farmer:Why? Haven\u2019t ya heard \u2018bout the crop disease \u2018round the
+    whole kingdom? That\u2019s why there ain\u2019t no townsfolk left. Fools, thinkin\u2019
+    they can outrun a famine."
+  - Dahlia:Will you be traveling with them?
+  - "Farmer:Nah, my family an\u2019 I are stayin\u2019 put. We\u2019ll weather it
+    out, just like we always have. The ritual\u2019ll be soon, an\u2019 then the
+    bad season will end."
+  - Dahlia:Ritual?
+  - "Farmer:Oh, yeah, the king\u2019s gatherin\u2019 up all the farm animals for
+    a ritual to suppress the God of Death, since obviously the prick\u2019s been
+    mucking up the yields."
+  - "Farmer:Not sure why it\u2019s gotta be a ritual this time. Usually, the king\u2019ll
+    just send offerings up to strengthen the God of Life. Offerings were workin\u2019
+    just fine as far as I knew."
+  - "Farmer:Now, git to it! These crops ain\u2019t gonna reap themselves!"

@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class NPC : MonoBehaviour
+public abstract class NPC : AInteractableComponent
 {
+    [SerializeField] public DialogueAsset dialogueAsset;
+    [SerializeField] public bool firstInteraction = true;
+    [SerializeField] public int repeatStartPosition;
+
+    protected DialogueBoxController dialogueController;
+
     protected GameObject _Player;
     protected bool canMove = false;
-    protected const double INTERACT_RADIUS = 4;
+    protected const double INTERACT_RADIUS = 8;
     protected int id = -1;
-    [SerializeField] bool firstInteraction = true;
-    [SerializeField] int repeatStartPosition;
     public string npcName;
-    public DialogueAsset dialogueAsset;
 
     //returns where the dialogue should start
     public int StartDialoguePosition 
@@ -33,15 +36,18 @@ public abstract class NPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        dialogueController = DialogueBoxController.GetInstance();
+        LateStart();
     }
+
+    protected virtual void LateStart() { }
 
     // Update is called once per frame
     void Update()
     {
         _Player = GameObject.FindWithTag("Player");
 
-        if (canMove)
+        /*if (canMove)
         {
             Movement();
         }
@@ -53,13 +59,13 @@ public abstract class NPC : MonoBehaviour
             {
                 Interaction();
             }
-        }
+        }*/
 
     }
 
     // For NPC -> enemy boss later on
-    protected abstract void Movement();
+    // protected abstract void Movement();
 
     //NPC Dialogue Based on Event Shifts
-    protected abstract void Interaction();
+    // protected abstract void Interaction();
 }

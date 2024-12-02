@@ -21,8 +21,9 @@ public class Player : MonoBehaviour
     public float HitPoints = 0f;
 
     //dialogue
+    protected DialogueBoxController dialogueController;
     [SerializeField] float talkDistance = 2;
-    private bool inConversation;
+    public bool inConversation;
     //Movement relative to camera
     public Transform cameraTransform;
 
@@ -40,13 +41,16 @@ public class Player : MonoBehaviour
 
         Globals.player = this;
 
+        dialogueController = DialogueBoxController.GetInstance();
+        OnEnable();
+
         //Save File Fixing
         /*Debug.Log(Globals.playerLocation);
         this.transform.position = Globals.playerLocation;
         Debug.Log(this.transform.position);
         Debug.Log("Player position updated");
         Physics.SyncTransforms(); //fix position for character controller*/
-        
+
         HitPoints = MaxHitPoints;
     }
     public void Update()
@@ -68,64 +72,69 @@ public class Player : MonoBehaviour
 
         bool dash = Input.GetKeyDown("space");
 
-        if (primaryAction)
-        {
-            playerInventoryComponent.UseActiveItemPrimaryAction();
-        }
-
         if (interact)
         {
             interactorComponent.Interact();
+            Debug.Log("converstaion");
+            Debug.Log(inConversation);
         }
+        if (!inConversation)
+        {
+            if (primaryAction)
+            {
+                playerInventoryComponent.UseActiveItemPrimaryAction();
+            }
+            if (dropItem)
+            {
+                playerInventoryComponent.DropItem();
+            }
 
-        if (dropItem)
-        {
-            playerInventoryComponent.DropItem();
-        }
-
-        if (numberKey1)
-        {
-            playerInventoryComponent.SelectItemByIndex(0);
-        }
-        if (numberKey2)
-        {
-            playerInventoryComponent.SelectItemByIndex(1);
-        }
-        if (numberKey3)
-        {
-            playerInventoryComponent.SelectItemByIndex(2);
-        }
-        if (numberKey4)
-        {
-            playerInventoryComponent.SelectItemByIndex(3);
-        }
-        if (numberKey5)
-        {
-            playerInventoryComponent.SelectItemByIndex(4);
-        }
-        if (numberKey6)
-        {
-            playerInventoryComponent.SelectItemByIndex(5);
-        }
-        if (dash)
-        {
-            StartCoroutine(characterMovementComponent.PlayerDash());
+            if (numberKey1)
+            {
+                playerInventoryComponent.SelectItemByIndex(0);
+            }
+            if (numberKey2)
+            {
+                playerInventoryComponent.SelectItemByIndex(1);
+            }
+            if (numberKey3)
+            {
+                playerInventoryComponent.SelectItemByIndex(2);
+            }
+            if (numberKey4)
+            {
+                playerInventoryComponent.SelectItemByIndex(3);
+            }
+            if (numberKey5)
+            {
+                playerInventoryComponent.SelectItemByIndex(4);
+            }
+            if (numberKey6)
+            {
+                playerInventoryComponent.SelectItemByIndex(5);
+            }
+            if (dash)
+            {
+                StartCoroutine(characterMovementComponent.PlayerDash());
+            }
         }
         Globals.player = this;
         Globals.SaveFileUpdate();
-        if (talk) 
+        /*if (talk) 
         {
             DialogueInteract();
-        }
+        }*/
     }
 
     public void FixedUpdate()
     {
-        Vector2 smoothedMovement = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1.0f);
-        Vector2 rawMovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Transform cameraTransform = Camera.main.transform;
-        characterMovementComponent.MovePlayerRelativeToCamera(new Vector3(smoothedMovement.x, 0.0f, smoothedMovement.y), new Vector3(rawMovementInput.x, 0.0f, rawMovementInput.y), cameraTransform);
-        
+        if (!inConversation)
+        {
+            Vector2 smoothedMovement = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1.0f);
+            Vector2 rawMovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Transform cameraTransform = Camera.main.transform;
+            characterMovementComponent.MovePlayerRelativeToCamera(new Vector3(smoothedMovement.x, 0.0f, smoothedMovement.y), new Vector3(rawMovementInput.x, 0.0f, rawMovementInput.y), cameraTransform);
+        }
     }
 
     // Basic implementation for taking damage, can modify later
@@ -152,11 +161,11 @@ public class Player : MonoBehaviour
         deathScreenGUI.ShowDeathScreen();
     }
 
-    public void DialogueInteract() 
+    /*public void DialogueInteract() 
     {
         if (inConversation)
         {
-            DialogueBoxController.instance.SkipLine();
+            dialogueController.SkipLine();
         }
         else
         {
@@ -164,13 +173,13 @@ public class Player : MonoBehaviour
             {
                 if (hitInfo.collider.gameObject.TryGetComponent(out NPC npc))
                 {
-                    DialogueBoxController.instance.StartDialogue(npc.dialogueAsset.dialogue, npc.StartDialoguePosition, npc.npcName);
+                    dialogueController.StartDialogue(npc.dialogueAsset, npc.StartDialoguePosition);
                 }
             }
         }
-    }
+    }*/
 
-    public void JoinConversation() 
+    public void JoinConversation()
     {
         inConversation = true;
     }

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Lighting : MonoBehaviour
 {
-    public Light DirectionalLight;
+    public float MaxBrightness = 2.0f;
+
+    protected Light DirectionalLight;
     [SerializeField] private static long XRotationLowerBound = 30;
     [SerializeField] private static long XRotationUpperBound = 150;
     [SerializeField] private static float DAY_INTENSITY = 2.5f;
-    [SerializeField] private static float NIGHT_INTENSITY = 0.3f; //change as needed, but this works pretty well
+    [SerializeField] private static float NIGHT_INTENSITY = 0.1f; //change as needed, but this works pretty well
     [SerializeField] private static Color LOWER_COLOR = new Color(242f / 255, 146f / 255, 19f / 255);
     [SerializeField] private static Color UPPER_COLOR = new Color(174f / 255, 211f / 255, 242f / 255);
     [SerializeField] private static Color NIGHT_COLOR = new Color(0, 0, 0);
@@ -16,6 +18,7 @@ public class Lighting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DirectionalLight = GetComponent<Light>();
         DirectionalLight.transform.rotation = Quaternion.Euler(XRotationLowerBound, -30, 0);
         DirectionalLight.intensity = DAY_INTENSITY;
     }
@@ -25,7 +28,7 @@ public class Lighting : MonoBehaviour
     {
         float angle = CalculateXAngle();
         DirectionalLight.transform.rotation = Quaternion.Euler(angle, -30, 0);
-        DirectionalLight.intensity = CalculateIntensity();
+        DirectionalLight.intensity = Mathf.Min(CalculateIntensity(), MaxBrightness);
         DirectionalLight.color = CalculateColor(angle);
         //Debug.Log("Intensity: " + DirectionalLight.intensity + " Angle: " + angle + "Day: " + Globals.dayCounter + "Color: " + DirectionalLight.color);
     }
