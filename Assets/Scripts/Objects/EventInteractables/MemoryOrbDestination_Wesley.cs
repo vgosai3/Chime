@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class MemoryOrbDestination_Wesley : AInteractableComponent
 {
+    public GameObject scythe;
+
+    protected GameObject _Player;
+
     public Transform memOrbReceiver;
     public GameObject currentNPC;
     public GameObject currentObj;
@@ -18,6 +22,12 @@ public class MemoryOrbDestination_Wesley : AInteractableComponent
     public bool sender;
 
     private bool interacting = false;
+
+    public void Start()
+    {
+        _Player = GameObject.FindWithTag("Player");
+    }
+
     public override void Interact(GameObject interactor)
     {
         if (!interacting && bellMovement.Following)
@@ -33,7 +43,7 @@ public class MemoryOrbDestination_Wesley : AInteractableComponent
         interactor.SetActive(false);
         // interactor.transform.position = memOrbReceiver.position;
         interactor.SetActive(true);
-        partnerObj.SetActive(true);
+        // partnerObj.SetActive(true);
 
         if (sender)
         {
@@ -55,6 +65,8 @@ public class MemoryOrbDestination_Wesley : AInteractableComponent
             //Removes the memory orb and exit object from the game.
             Destroy(partnerObj);
             Destroy(currentObj);
+            Instantiate(scythe, _Player.transform.position, Quaternion.identity);
+            _Player.transform.position = new Vector3(11.73f, 0.5f, 19.38f);
         }
 
     }

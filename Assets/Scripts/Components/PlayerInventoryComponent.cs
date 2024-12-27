@@ -138,7 +138,7 @@ public class PlayerInventoryComponent : MonoBehaviour
 
     public int[] getItemsSerialized()
     {
-        int[] returnArr = new int[SlotCount];
+        var returnArr = new int[SlotCount];
         for (int i = 0; i < SlotCount; i++)
         { 
             returnArr[i] = (items[i] == null) ? (int)Item.None : items[i].getID();

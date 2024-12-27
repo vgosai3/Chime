@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbbb32557779e4043b7ca4ef0470528c, type: 3}
+  m_Name: Jester Dialogue 3
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Jester:Okay, okay, you win! Jeez!
+  - "Jester:I\u2019m done throwing bombs, so for the love of everything that is holy
+    will you PLEASE get away from my turret."
+  - "Jester:What are you even here for anyway? Just to mock me or something? Don\u2019t
+    you have anything better to do than-"
+  - "Jester:The bell you\u2019ve got with you\u2026 don\u2019t tell me their royal
+    pratness is resorting to sending out commoners to recruit more commoners."
+  - Dahlia:...?
+  - Jester:...No? Well, I guess it was always beyond them to get anything done.
+  - "Jester:I hate to break whatever utopian reality you were in, but anything you\u2019ve
+    heard about our ruler\u2026 I mean, look around you! This is what happens when
+    you give a crown to an air-head."
+  - "Jester:I hate to break whatever utopian reality you were in, but anything you\u2019ve
+    heard about our ruler\u2026 I mean, look around you! This is what happens when
+    you give a crown to an air-head."
+  - Jester:How many deaths do you think you as people have caused for the God of
+    Death acolytes? How many people have you terrorized into the streets, begging
+    for simply food and water to survive?
+  - "Jester:What makes them think that a ritual to stop the God of Death would bring
+    back the God of Life? People with their fickle minds and flippant behaviors\u2026
+    you can\u2019t just undo the damage you\u2019ve caused!"
+  - "Jester:But what do I know? I\u2019m just the jester that has to pay their dues
+    to keep their assets. But let\u2019s go ahead and kick them out too, instead
+    of laughing at their \u201Cillogical\u201D ideas."
+  - Jester:But no, instead of fixing your mistakes, you rely on a God, who is cast
+    to who knows where, to suppress the God that kicked it out. Sure, that makes
+    PERFECT sense.
+  - Dahlia:...
+  - Jester:But, I digress.
+  - "Jester:You know, as rude as you\u2019ve been with that turret, you\u2019re not
+    half bad with it. So, I\u2019ll make you a deal."
+  - "Jester:I\u2019ve made this spot pretty safe, but it's getting a bit suffocating
+    being stuck here all the time.."
+  - "Jester:Now, I\u2019m not going out with all those monsters roaming about, but
+    clearly you\u2019re crazy enough to. And crazy enough to shoot an innocent bystander,
+    it seems."
+  - "Jester:Now, I\u2019m not going out with all those monsters roaming about, but
+    clearly you\u2019re crazy enough to. And crazy enough to shoot an innocent bystander,
+    it seems."
+  - "Jester:So, if you\u2019ll use those turret skills against something warranted,
+    namely the monsters, I\u2019ll keep any turrets you have safe and in good condition.
+    I\u2019ll even let you use one of mine! Isn\u2019t that generous?"
+  - Dahlia:Really?
+  - "Jester:Ah ah ah - you still have to be careful with it! If the turret is in
+    the same condition as my tent - that you blew up, may I remind you - be prepared
+    for another fight. Except you won\u2019t have a turret to help you. Got it?"
+  - Dahlia:Yes sir!
+  - Jester:Good. Come pick it up when you're ready.

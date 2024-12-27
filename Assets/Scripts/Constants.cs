@@ -37,6 +37,7 @@ public enum Item
 public enum NonPlayerCharacters
 {
     Farmer,
+    Jester,
     Blacksmith,
     King
 }

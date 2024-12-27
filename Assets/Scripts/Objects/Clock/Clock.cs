@@ -23,12 +23,12 @@ public class Clock : MonoBehaviour
     // Pausing
     public void Pause()
     {
-        Globals.isPaused = true;
+        Globals.IsPaused = true;
     }
 
     public void UnPause()
     {
-        Globals.isPaused = false;
+        Globals.IsPaused = false;
     }
 
     // Start is called before the first frame update
@@ -39,7 +39,7 @@ public class Clock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Globals.isPaused)
+        if (!Globals.IsPaused)
         {
             UpdateTime();
         }

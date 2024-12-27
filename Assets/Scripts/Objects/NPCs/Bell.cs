@@ -61,8 +61,6 @@ public class BellMovement : AInteractableComponent
 
     public override void Interact(GameObject interactor)
     {
-        Debug.Log("Interacted with bell");
-        Debug.Log(Following);
         Following = true;
         BellAudio.Play();
     }

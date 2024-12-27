@@ -7,23 +7,23 @@ using UnityEngine.UI;
 //Is it easy to simply change icon when character inv component has item added to it?
 public class InventoryGUI : MonoBehaviour
 {
-    public PlayerInventoryComponent playerInventory;
+    private PlayerInventoryComponent playerInventory;
     private Image[] itemIcons;
     private Image activeItemBorder;
     public void Start()
     {
-        playerInventory = GameObject.FindAnyObjectByType<Player>().GetComponent<PlayerInventoryComponent>();
+        playerInventory = Globals.Player.GetComponent<PlayerInventoryComponent>();
         itemIcons = new Image[playerInventory.SlotCount];
         Image[] tempImages = GetComponentsInChildren<Image>();
         int imageCount = 0;
         for (int i = 0; i < tempImages.Length; i++)
         {
-            if (tempImages[i].name.Contains("ItemIcon"))
+            if (tempImages[i].name.Contains("UI_ItemIcon"))
             {
                 itemIcons[imageCount] = tempImages[i];
                 imageCount++;
             }
-            if (tempImages[i].name.Contains("ActiveItemBorder"))
+            if (tempImages[i].name.Contains("UI_ActiveItemBorder"))
             {
                 activeItemBorder = tempImages[i];
             }

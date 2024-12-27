@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 312462710510938955}
   - component: {fileID: 2591249295106521538}
   m_Layer: 5
-  m_Name: Dialogue Frame
+  m_Name: Dialogue_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 5486416559327727099}
   - component: {fileID: 165664102589183158}
   m_Layer: 5
-  m_Name: Character Art
+  m_Name: Dialogue_CharacterArt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 3347983170784501240}
   - component: {fileID: 8491508701060826229}
   m_Layer: 5
-  m_Name: Dialogue Text
+  m_Name: Dialogue_Text
   m_TagString: Dialogue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 9143415533602998506}
   - component: {fileID: 4121038532077467835}
   m_Layer: 5
-  m_Name: Increment
+  m_Name: Dialogue_Hint
   m_TagString: Dialogue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -430,8 +430,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 766996638042331722}
+  - component: {fileID: 644012730778238031}
   m_Layer: 5
-  m_Name: Dialogue Box
+  m_Name: UI_Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,9 +456,21 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -18, y: -29}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &644012730778238031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135039244395154623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bad8441fe52e6b41951f00a9f665311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8790202093089003156
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +483,7 @@ GameObject:
   - component: {fileID: 5684358175868295514}
   - component: {fileID: 4679904933452805885}
   m_Layer: 5
-  m_Name: Character Name
+  m_Name: Dialogue_CharacterName
   m_TagString: Name
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

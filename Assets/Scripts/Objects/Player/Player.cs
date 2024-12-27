@@ -9,23 +9,20 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
 
-    //Components
+    // Player components
     private CharacterMovementComponent characterMovementComponent;
     private InteractorComponent interactorComponent;
     private PlayerInventoryComponent playerInventoryComponent;
-    private bool hasLoaded = false;
-    public DeathScreenGUI deathScreenGUI;
 
-    //temp, need to fix HitPoints to be private?
+    // Hitpoint values
     public float MaxHitPoints = 100f;
     public float HitPoints = 0f;
 
-    //dialogue
-    protected DialogueBoxController dialogueController;
-    [SerializeField] float talkDistance = 2;
-    public bool inConversation;
-    //Movement relative to camera
-    public Transform cameraTransform;
+    // Event handler called on player death
+    public event EventHandler<bool> OnDeath;
+
+    // Dialogue variables
+    public bool IsInConversation;
 
     public void Reset()
     {
@@ -35,59 +32,43 @@ public class Player : MonoBehaviour
     }
     public void Start()
     {
-        characterMovementComponent = this.GetComponent<CharacterMovementComponent>();
-        interactorComponent = this.GetComponent<InteractorComponent>();
-        playerInventoryComponent = this.GetComponent<PlayerInventoryComponent>();
+        // Retrieve various components of the player
+        characterMovementComponent = GetComponent<CharacterMovementComponent>();
+        interactorComponent = GetComponent<InteractorComponent>();
+        playerInventoryComponent = GetComponent<PlayerInventoryComponent>();
 
-        Globals.player = this;
-
-        dialogueController = DialogueBoxController.GetInstance();
-        OnEnable();
-
-        //Save File Fixing
-        /*Debug.Log(Globals.playerLocation);
-        this.transform.position = Globals.playerLocation;
-        Debug.Log(this.transform.position);
-        Debug.Log("Player position updated");
-        Physics.SyncTransforms(); //fix position for character controller*/
-
+        // Set hitpoints
         HitPoints = MaxHitPoints;
+        UpdateHealth();
+
+        // Set InConversation on dialogue events
+        DialogueBoxController.OnDialogueStart += () => { IsInConversation = true;
+            Debug.Log("Dialogue started");
+        };
+        DialogueBoxController.OnDialogueEnd += () => { IsInConversation = false;
+            Debug.Log("Dialogue ended");
+        };
     }
     public void Update()
     {
-        //Debug.Log(Globals.player.characterMovementComponent);
-
-        bool primaryAction = Input.GetButtonDown("PrimaryAction");
+        // When interacting, call interact component
         bool interact = Input.GetButtonDown("Interact");
-        bool talk = Input.GetButtonDown("Talk");
-
-        //Temp buttonchecks?
-        bool dropItem = Input.GetKeyDown("g");
-        bool numberKey1 = Input.GetKeyDown("1");
-        bool numberKey2 = Input.GetKeyDown("2");
-        bool numberKey3 = Input.GetKeyDown("3");
-        bool numberKey4 = Input.GetKeyDown("4");
-        bool numberKey5 = Input.GetKeyDown("5");
-        bool numberKey6 = Input.GetKeyDown("6");
-
-        bool dash = Input.GetKeyDown("space");
 
         if (interact)
         {
             interactorComponent.Interact();
-            Debug.Log("converstaion");
-            Debug.Log(inConversation);
         }
-        if (!inConversation)
+
+        // Stop other interaction when in conversation
+        if (!IsInConversation)
         {
-            if (primaryAction)
-            {
-                playerInventoryComponent.UseActiveItemPrimaryAction();
-            }
-            if (dropItem)
-            {
-                playerInventoryComponent.DropItem();
-            }
+            // Select inventory item slot
+            bool numberKey1 = Input.GetKeyDown("1");
+            bool numberKey2 = Input.GetKeyDown("2");
+            bool numberKey3 = Input.GetKeyDown("3");
+            bool numberKey4 = Input.GetKeyDown("4");
+            bool numberKey5 = Input.GetKeyDown("5");
+            bool numberKey6 = Input.GetKeyDown("6");
 
             if (numberKey1)
             {
@@ -113,101 +94,70 @@ public class Player : MonoBehaviour
             {
                 playerInventoryComponent.SelectItemByIndex(5);
             }
+
+            // Activate primary action of currently selected item
+            bool primaryAction = Input.GetButtonDown("PrimaryAction");
+
+            if (primaryAction)
+            {
+                playerInventoryComponent.UseActiveItemPrimaryAction();
+            }
+
+            // Drop currently selected item
+            bool dropItem = Input.GetKeyDown("g");
+
+            if (dropItem)
+            {
+                playerInventoryComponent.DropItem();
+            }
+
+            // Complete dash movement
+            bool dash = Input.GetKeyDown("space");
+
             if (dash)
             {
                 StartCoroutine(characterMovementComponent.PlayerDash());
             }
         }
-        Globals.player = this;
-        Globals.SaveFileUpdate();
-        /*if (talk) 
-        {
-            DialogueInteract();
-        }*/
     }
 
     public void FixedUpdate()
     {
-        if (!inConversation)
+        // Stop other interaction when in conversation
+        if (!IsInConversation)
         {
+            // Clamp magnitude of movement
             Vector2 smoothedMovement = Vector2.ClampMagnitude(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), 1.0f);
             Vector2 rawMovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            Transform cameraTransform = Camera.main.transform;
-            characterMovementComponent.MovePlayerRelativeToCamera(new Vector3(smoothedMovement.x, 0.0f, smoothedMovement.y), new Vector3(rawMovementInput.x, 0.0f, rawMovementInput.y), cameraTransform);
+            characterMovementComponent.MovePlayerRelativeToCamera(new Vector3(smoothedMovement.x, 0.0f, smoothedMovement.y), new Vector3(rawMovementInput.x, 0.0f, rawMovementInput.y), Camera.main.transform);
         }
     }
 
-    // Basic implementation for taking damage, can modify later
+    // Basic implementation for taking damage
     public void TakeDamage(float damage)
     {
+        // Take damage
         HitPoints -= damage;
-        if (HitPoints <= 0) {
-            PlayerDeath();
-        }
+
+        // Check HP values
+        UpdateHealth();
     }
+
+
     // Basic implementation for player health
-    public void UpdateHealth(float mod) {
-        HitPoints += MaxHitPoints;
-
-        if (HitPoints > MaxHitPoints) {
+    public void UpdateHealth() {
+        // Limit HP to max if exceeded
+        if (HitPoints > MaxHitPoints)
+        {
             HitPoints = MaxHitPoints;
-        } else if (HitPoints <= 0f) {
+        }
+
+        // Check if player is dead
+        else if (HitPoints <= 0f)
+        {
             HitPoints = 0f;
-            PlayerDeath();
+            // Invoke death event
+            OnDeath.Invoke(this, true);
         }
-    }
-    public void PlayerDeath()
-    {
-        deathScreenGUI.ShowDeathScreen();
-    }
-
-    /*public void DialogueInteract() 
-    {
-        if (inConversation)
-        {
-            dialogueController.SkipLine();
-        }
-        else
-        {
-            if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitInfo, talkDistance))
-            {
-                if (hitInfo.collider.gameObject.TryGetComponent(out NPC npc))
-                {
-                    dialogueController.StartDialogue(npc.dialogueAsset, npc.StartDialoguePosition);
-                }
-            }
-        }
-    }*/
-
-    public void JoinConversation()
-    {
-        inConversation = true;
-    }
-
-    public void LeaveConversation()
-    {
-        inConversation = false;
-    }
-
-    private void OnEnable()
-    {
-        DialogueBoxController.OnDialogueStarted += JoinConversation;
-        DialogueBoxController.OnDialogueEnded += LeaveConversation;
-    }
-
-    private void OnDisable()
-    {
-        DialogueBoxController.OnDialogueStarted -= JoinConversation;
-        DialogueBoxController.OnDialogueEnded -= LeaveConversation;
-    }
-
-    public int[] getPlayerInventorySerialized()
-    {
-        return playerInventoryComponent.getItemsSerialized();
-    }
-
-    public void updatePlayerInventory(int[] id)
-    {
-        playerInventoryComponent.updateItemsSerialized(id);
     }
 }

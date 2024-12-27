@@ -47,7 +47,7 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("Level");
         // Reset timescale if returned from pause menu
-        Time.timeScale = 1f;
+        Time.timeScale = 1.0f;
     }
 
     //Play button functionality take to level 1
@@ -64,7 +64,7 @@ public class MainMenu : MonoBehaviour
     }
 
     // Volume slider 
-    public void SetVolume(float volume)
+    public void SetVolume(System.Single volume)
     {
         audioMixer.SetFloat("volume", volume);
     }

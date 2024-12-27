@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3133751649095622015}
   - component: {fileID: 9173750365334089419}
   - component: {fileID: 464352139819849755}
-  - component: {fileID: 760619069490286193}
   - component: {fileID: 585822963698777278}
   - component: {fileID: 3200168838276280221}
   m_Layer: 10
@@ -87,19 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &760619069490286193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495230862514207442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6346c200636d14fb07ec3145a4a1f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InteractorArea: {fileID: 3200168838276280221}
 --- !u!114 &585822963698777278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,10 +99,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractableArea: {fileID: 3200168838276280221}
-  dialogueAsset: {fileID: 11400000, guid: ff4db1ad3d0effb43b62bbe74e13d7f6, type: 2}
   firstInteraction: 1
   repeatStartPosition: 0
   npcName: Farmer
+  FarmerDialogueAsset: {fileID: 11400000, guid: ff4db1ad3d0effb43b62bbe74e13d7f6, type: 2}
 --- !u!136 &3200168838276280221
 CapsuleCollider:
   m_ObjectHideFlags: 0

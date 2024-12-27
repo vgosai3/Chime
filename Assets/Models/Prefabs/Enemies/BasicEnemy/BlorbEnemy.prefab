@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6423581003330247497}
   - component: {fileID: 8876317687818580896}
   - component: {fileID: -2408899344005698690}
+  - component: {fileID: 8170052021188035422}
   m_Layer: 0
   m_Name: BlorbEnemy
   m_TagString: Enemy
@@ -157,9 +158,31 @@ MonoBehaviour:
   Damage: 3
   MovementSpeed: 1.5
   Distance: 10
-  BounceDistance: 2
-  BounceSpeed: 5
+  BounceDistance: 1
+  BounceSpeed: 2
   hitRate: 2
+--- !u!195 &8170052021188035422
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025566382677359894}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &5637098742702698149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -247,7 +270,7 @@ Animator:
   m_GameObject: {fileID: 4826617046015235060}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 01163518f6cfce94bbf2ddf8a1fc75fb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 095d1d60b7f2fe64caab1f8bed5bb742, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -7,6 +7,8 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
 
+    protected GameObject _Player;
+
     private readonly float minDist = 5f;
     private readonly float maxDist = 10f;
     private readonly float spawnRate = 1f;
@@ -16,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         _nextSpawnTime = Time.time;
+        _Player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -28,9 +31,13 @@ public class EnemySpawner : MonoBehaviour
             //gameObject.layer = LayerMobs
             Instantiate(enemyPrefab, RandomPos(), Quaternion.identity);
         }*/
-        if (GameObject.FindWithTag("Enemy") == null)
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length < Math.Pow(2, Globals.dayCounter + 2) && !Globals.isDaytime)
         {
-            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            var delta = UnityEngine.Random.insideUnitSphere * 4;
+            var spawnPosition = _Player.transform.position + (delta.normalized * 10) + delta;
+            spawnPosition.y = 0.5f;
+            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         }
 
     }

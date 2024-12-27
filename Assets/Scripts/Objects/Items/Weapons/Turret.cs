@@ -14,11 +14,11 @@ public class Turret : AItem
     private GameObject _Closest;
     public GameObject Closest { get { return _Closest; } }
 
-    // Start is called before the first frame update
+    /*// Start is called before the first frame update
     void Start()
     {
         
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
