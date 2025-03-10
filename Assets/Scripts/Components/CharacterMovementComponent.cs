@@ -15,6 +15,8 @@ public class CharacterMovementComponent : MonoBehaviour
     [SerializeField] public float DashCooldown = 3.0f;
     private bool IsDashing = false;
     public float LastDash = 0.0f;
+    private bool canMove = true;
+
 
     public void Reset()
     {
@@ -27,7 +29,7 @@ public class CharacterMovementComponent : MonoBehaviour
 
     public void MovePlayerRelativeToCamera(Vector3 movementVector, Vector3 directionToFace, Transform cameraTransform)
     {
-        if (!IsDashing)
+        if (canMove && !IsDashing)
         {
             Vector3 forward = cameraTransform.forward;
             Vector3 right = cameraTransform.right;
@@ -50,6 +52,11 @@ public class CharacterMovementComponent : MonoBehaviour
             }
         }
     }
+    public void EnableMovement(bool enable)
+    {
+        canMove = enable;
+    }
+
 
     public IEnumerator PlayerDash()
     {
